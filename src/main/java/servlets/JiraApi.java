@@ -48,12 +48,12 @@ public class JiraApi {
 
     //Кол-во АКТИВНЫХ обращений на данный момент для каждого
     public static String issueActiveNow(String fName, String name){
-        return fName+" : "+issueCountRest(Consts.ISSUE_ASSIGNEE+name+Consts.ISSUE_ACTIVE_NOW);
+        return fName+" : "+issueCountRest(Consts.ISSUE_ACTIVE_NOW+name);
     }
 
     //Кол-во ЗАКРЫТЫХ обращений за текущий месяц для каждого
     public static String issueClosedMonth(String fName, String name){
-        return fName+" : "+issueCountRest(Consts.ISSUE_ASSIGNEE+name+Consts.ISSUE_CLOSED_MONTH);
+        return fName+" : "+issueCountRest(Consts.ISSUE_CLOSED_MONTH+name);
     }
 
     //Все Открытые\Закрытые обращения за месяц
@@ -78,7 +78,7 @@ public class JiraApi {
 
     //Кол-во ЗАКРЫТЫХ обращений за предыдущий месяц для каждого
     public static String issueClosedPMonth(String name){
-        return issueCountRest(Consts.ISSUE_ASSIGNEE+name+Consts.ISSUE_CLOSED_PRMONTH);
+        return issueCountRest(Consts.ISSUE_CLOSED_PRMONTH+name);
     }
 
     //Лидер по кол-ву решенных обращений за прошлый месяц
