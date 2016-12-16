@@ -3,6 +3,8 @@ package servlets;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
+import java.util.Locale;
+
 /**
  * Created by Mindkilla on 10.12.2016.
  */
@@ -11,6 +13,15 @@ public class Date {
     public static int getPrevMonth(){
         DateTime date = new DateTime();
         return date.getMonthOfYear()-1;
+    }
+
+    public static String getMonthName(){
+        String monthName = null;
+        if ((getPrevMonth() >= 1) && (getPrevMonth() <= 12)) {
+            LocalDate aDate = new LocalDate(getYear(), getPrevMonth(), 1);
+            monthName = aDate.monthOfYear().getAsText(Locale.getDefault());
+        }
+        return monthName;
     }
 
     public static int getYear(){

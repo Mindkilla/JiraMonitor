@@ -108,7 +108,7 @@
                 <div class="amazo-tile tile-white">
                     <div class="tile-heading">
                         <span class="title">Лидер по кол-ву решенных заявок за ПРОШЛЫЙ месяц</span>
-                        <span class="secondary">ноябрь</span>
+                        <span class="secondary">${Month}</span>
                     </div>
                     <div class="tile-body">
                         <span class="content">${Max}</span>
