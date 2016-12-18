@@ -16,12 +16,8 @@ public class Date {
     }
 
     public static String getMonthName(){
-        String monthName = null;
-        if ((getPrevMonth() >= 1) && (getPrevMonth() <= 12)) {
-            LocalDate aDate = new LocalDate(getYear(), getPrevMonth(), 1);
-            monthName = aDate.monthOfYear().getAsText(Locale.getDefault());
-        }
-        return monthName;
+        LocalDate aDate = new LocalDate(getYear(), getPrevMonth(), 1);
+        return aDate.monthOfYear().getAsText(Locale.getDefault());
     }
 
     public static int getYear(){
