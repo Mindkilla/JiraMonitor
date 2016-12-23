@@ -26,10 +26,9 @@ public class Consts {
     public static final String DEFECT_NAME = "Дефектов : ";
     public static final String CONSULT_NAME = "Консультаций : ";
     public static final String WHISH_NAME = "Пожеланий : ";
-    public static final String ISSUE = "(10405)";
     public static final String DEFECT = "(10300)";
     public static final String CONSULT = "(10304)";
-    public static final String WHISH = "(10304)";
+    public static final String WHISH = "(10405)";
 
     //JQL-запросы
     //Открытых\Закрытых обращений за сегодня
@@ -50,7 +49,7 @@ public class Consts {
     public static final String ISSUE_CLOSED_CURMONTH = "project = SUPP AND cf[14303] = 7 AND type not in (10405) AND resolution = 10407 AND updatedDate >= startOfMonth() AND updateddate <= endOfMonth()";
 
     //Кол-во ЗАКРЫТЫХ дефектов (10300), консультаций(10304), пожеланий (10304) за месяц
-    public static final String DEFECT_CLOSED_MONTH = "project = SUPP AND cf[14303] = 7 AND type not in (10405) AND resolution = 10407 AND updatedDate >= startOfMonth() AND updateddate <= endOfMonth() AND type in ";
+    public static final String DEFECT_CLOSED_MONTH = "project = SUPP AND cf[14303] = 7 AND resolution = 10407 AND updatedDate >= startOfMonth() AND updateddate <= endOfMonth() AND type in ";
 
     //Кол-во ОТКРЫТЫХ дефектов(10300), консультаций(10304)
     public static final String DEFECT_OPENED_NOW = "project = SUPP AND cf[14303] = 7 AND type not in (10405) AND resolution = Unresolved AND type in ";

@@ -66,7 +66,7 @@ public class JiraApi {
     }
 
 
-    //Кол-во ЗАКРЫТЫХ дефектов (10300), консультаций(10304), пожеланий (10304) за месяц
+    //Кол-во ЗАКРЫТЫХ дефектов (10300), консультаций(10304), пожеланий (10405) за месяц
     public static String defectClosedMonth(String name, String jql){
         return name+issueCountRest(Consts.DEFECT_CLOSED_MONTH+jql);
     }
