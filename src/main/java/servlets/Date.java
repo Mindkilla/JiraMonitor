@@ -12,6 +12,9 @@ public class Date {
 
     public static int getPrevMonth(){
         DateTime date = new DateTime();
+        if (date.getMonthOfYear()-1 == 0){
+            return 12;
+        }
         return date.getMonthOfYear()-1;
     }
 
@@ -22,6 +25,9 @@ public class Date {
 
     public static int getYear(){
         DateTime date = new DateTime();
+        if (getPrevMonth() == 12){
+            return date.getYear()-1;
+        }
         return date.getYear();
     }
 
