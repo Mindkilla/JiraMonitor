@@ -1,14 +1,9 @@
 package servlets;
 
-import net.rcarz.jiraclient.BasicCredentials;
-import net.rcarz.jiraclient.Issue;
-import net.rcarz.jiraclient.JiraClient;
-import net.rcarz.jiraclient.JiraException;
+import net.rcarz.jiraclient.*;
 import org.apache.log4j.Logger;
 
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Mindkilla on 10.12.2016.
@@ -35,6 +30,27 @@ public class JiraApi {
         }
         log.info(jql+" - RESULT: "+total);
         return Integer.toString (total) ;
+    }
+
+    public static Integer countVacation(String jql) {
+        JiraClient conect = jiraConnect();
+        int time = 0;
+
+        try {
+            Issue.SearchResult result = conect.searchIssues(jql);
+            if (result.issues.isEmpty()){
+                time = 0;
+            }
+            for (int i = 0; i < result.issues.size(); i++) {
+                time = time + result.issues.get(i).getTimeSpent();
+            }
+        }
+        catch (JiraException ex) {
+            if (ex.getCause() != null)
+                log.error(ex.getCause().getMessage());
+        }
+        log.info(jql+" - RESULT: "+time);
+        return time;
     }
 
     //Открытых\Закрытых обращений за сегодня
