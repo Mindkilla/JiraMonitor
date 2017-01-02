@@ -22,10 +22,14 @@ public class VacationServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-
-        request.setAttribute("countVacationL", JiraApi.countVacation(Consts.VACATION_CURRENT_YEAR+Consts.LEVAS ));
-        request.setAttribute("countVacationE", JiraApi.countVacation(Consts.VACATION_CURRENT_YEAR+Consts.ESIES ));
-        request.setAttribute("countVacationK", JiraApi.countVacation(Consts.VACATION_CURRENT_YEAR+Consts.KUAAE ));
+        //Отпуска
+        request.setAttribute("countVacationL", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR+Consts.LEVAS ));
+        request.setAttribute("countVacationE", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR+Consts.ESIES ));
+        request.setAttribute("countVacationK", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR+Consts.KUAAE ));
+        //Простои
+        request.setAttribute("countInactivityL", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR+Consts.LEVAS ));
+        request.setAttribute("countInactivityE", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR+Consts.ESIES ));
+        request.setAttribute("countInactivityK", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR+Consts.KUAAE ));
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation.jsp");
         dispatcher.forward(request, response);

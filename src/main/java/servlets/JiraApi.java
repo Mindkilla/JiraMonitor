@@ -32,10 +32,10 @@ public class JiraApi {
         return Integer.toString (total) ;
     }
 
-    public static Integer countVacation(String jql) {
+    //в секундах , можно форматировать результат при выводе куда-либо
+    public static Integer projectTimeCount(String jql) {
         JiraClient conect = jiraConnect();
         int time = 0;
-
         try {
             Issue.SearchResult result = conect.searchIssues(jql);
             if (result.issues.isEmpty()){
