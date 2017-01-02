@@ -11,8 +11,8 @@ import java.io.IOException;
 /**
  * Created by Mindkilla on 02.01.2017.
  */
-@WebServlet("/vacation")
-public class VacationServlet extends HttpServlet{
+@WebServlet("/other")
+public class OtherServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class VacationServlet extends HttpServlet{
         request.setAttribute("countInactivityE", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR+Consts.ESIES ));
         request.setAttribute("countInactivityK", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR+Consts.KUAAE ));
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/vacation.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/other.jsp");
         dispatcher.forward(request, response);
     }
 }
