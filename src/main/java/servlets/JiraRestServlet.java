@@ -33,8 +33,8 @@ public class JiraRestServlet extends HttpServlet {
         request.setAttribute("EsiesС", JiraApi.issueClosedMonth(Consts.NAME_JOHN, Consts.ESIES));
         request.setAttribute("KuaaeС", JiraApi.issueClosedMonth(Consts.NAME_AIDAR, Consts.KUAAE));
         //Лидер по кол-ву решенных обращений за прошлый месяц
-        request.setAttribute("Month",Date.getMonthName());
-        request.setAttribute("Max",JiraApi.maxCountMonthRest());
+        request.setAttribute("Month", Date.getMonthName());
+        request.setAttribute("Max", JiraApi.maxCountMonthRest());
         //Открытые закрытые
         request.setAttribute("issueOpenCurmonth", JiraApi.issueOpenCurmonth());
         request.setAttribute("issueClosedCurmonth", JiraApi.issueClosedCurmonth());

@@ -12,106 +12,100 @@ public class JiraApi {
     private static final Logger log = Logger.getLogger(JiraApi.class);
 
     //Connect to jira rest api
-    private static JiraClient jiraConnect(){
+    private static JiraClient jiraConnect() {
         BasicCredentials creds = new BasicCredentials(Consts.JIRA_USER, Consts.JIRA_PASSWORD);
         return new JiraClient(Consts.JIRA_URL, creds);
     }
 
-    //Count of issue NAME for period
+    //Count of issue
     public static String issueCountRest(String jql) {
-        JiraClient conect = jiraConnect();
-        Integer total = null;
+        int total = 0;
         try {
-            Issue.SearchResult result = conect.searchIssues(jql,"project");
+            Issue.SearchResult result = jiraConnect().searchIssues(jql, "project");
             total = result.total;
         } catch (JiraException ex) {
             if (ex.getCause() != null)
                 log.error(ex.getCause().getMessage());
         }
-        log.info(jql+" - RESULT: "+total);
-        return Integer.toString (total) ;
+        log.info(jql + " - RESULT: " + total);
+        return Integer.toString(total);
     }
 
     //в секундах , можно форматировать результат при выводе куда-либо
     public static Integer projectTimeCount(String jql) {
-        JiraClient conect = jiraConnect();
         int time = 0;
         try {
-            Issue.SearchResult result = conect.searchIssues(jql);
-            if (result.issues.isEmpty()){
+            Issue.SearchResult result = jiraConnect().searchIssues(jql);
+            if (result.issues.isEmpty()) {
                 time = 0;
             }
             for (int i = 0; i < result.issues.size(); i++) {
                 time = time + result.issues.get(i).getTimeSpent();
             }
-        }
-        catch (JiraException ex) {
+        } catch (JiraException ex) {
             if (ex.getCause() != null)
                 log.error(ex.getCause().getMessage());
         }
-        log.info(jql+" - RESULT: "+time);
+        log.info(jql + " - RESULT: " + time);
         return time;
     }
 
     //Открытых\Закрытых обращений за сегодня
-    public static String issueNewToday(){
-        return "Новых : "+issueCountRest(Consts.ISSUE_NEW_TODAY);
+    public static String issueNewToday() {
+        return "Новых : " + issueCountRest(Consts.ISSUE_NEW_TODAY);
     }
 
-    public static String issueClosedToday(){
-        return "Закрыто: "+issueCountRest(Consts.ISSUE_CLOSED_TODAY);
+    public static String issueClosedToday() {
+        return "Закрыто: " + issueCountRest(Consts.ISSUE_CLOSED_TODAY);
     }
 
     //Кол-во АКТИВНЫХ обращений на данный момент для каждого
-    public static String issueActiveNow(String fName, String name){
-        return fName+" : "+issueCountRest(Consts.ISSUE_ACTIVE_NOW+name);
+    public static String issueActiveNow(String fName, String name) {
+        return fName + " : " + issueCountRest(Consts.ISSUE_ACTIVE_NOW + name);
     }
 
     //Кол-во ЗАКРЫТЫХ обращений за текущий месяц для каждого
-    public static String issueClosedMonth(String fName, String name){
-        return fName+" : "+issueCountRest(Consts.ISSUE_CLOSED_MONTH+name);
+    public static String issueClosedMonth(String fName, String name) {
+        return fName + " : " + issueCountRest(Consts.ISSUE_CLOSED_MONTH + name);
     }
 
     //Все Открытые\Закрытые обращения за месяц
-    public static String issueOpenCurmonth(){
-        return "Открытые: "+issueCountRest(Consts.ISSUE_OPEN_CURMONTH);
+    public static String issueOpenCurmonth() {
+        return "Открытые: " + issueCountRest(Consts.ISSUE_OPEN_CURMONTH);
     }
 
-    public static String issueClosedCurmonth(){
-        return "Закрытые: "+issueCountRest(Consts.ISSUE_CLOSED_CURMONTH);
+    public static String issueClosedCurmonth() {
+        return "Закрытые: " + issueCountRest(Consts.ISSUE_CLOSED_CURMONTH);
     }
-
 
     //Кол-во ЗАКРЫТЫХ дефектов (10300), консультаций(10304), пожеланий (10405) за месяц
-    public static String defectClosedMonth(String name, String jql){
-        return name+issueCountRest(Consts.DEFECT_CLOSED_MONTH+jql);
+    public static String defectClosedMonth(String name, String jql) {
+        return name + issueCountRest(Consts.DEFECT_CLOSED_MONTH + jql);
     }
 
     //Кол-во ОТКРЫТЫХ дефектов(10300), консультаций(10304)
-    public static String defectOpenedNow(String name, String jql){
-        return name+issueCountRest(Consts.DEFECT_OPENED_NOW+jql);
+    public static String defectOpenedNow(String name, String jql) {
+        return name + issueCountRest(Consts.DEFECT_OPENED_NOW + jql);
     }
 
     //Кол-во ЗАКРЫТЫХ обращений за предыдущий месяц для каждого
-    public static String issueClosedPMonth(String name){
-        return issueCountRest(Consts.ISSUE_CLOSED_PRMONTH+name);
+    public static String issueClosedPMonth(String name) {
+        return issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + name);
     }
 
     //Лидер по кол-ву решенных обращений за прошлый месяц
-    public static StringBuilder maxCountMonthRest()
-    {
-        Hashtable<String, Integer> arrayOfCounts  = new Hashtable<String, Integer>();
+    public static StringBuilder maxCountMonthRest() {
+        Hashtable<String, Integer> arrayOfCounts = new Hashtable<String, Integer>();
         arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueClosedPMonth(Consts.LEVAS)));
         arrayOfCounts.put(Consts.NAME_ANDREY, Integer.parseInt(issueClosedPMonth(Consts.SMIANA)));
         arrayOfCounts.put(Consts.NAME_JOHN, Integer.parseInt(issueClosedPMonth(Consts.ESIES)));
         arrayOfCounts.put(Consts.NAME_AIDAR, Integer.parseInt(issueClosedPMonth(Consts.KUAAE)));
 
-        int maxValueInMap=(Collections.max(arrayOfCounts.values()));
+        int maxValueInMap = (Collections.max(arrayOfCounts.values()));
         String maxName = null;
 
-        for(Map.Entry<String,Integer> entry : arrayOfCounts.entrySet()) {
-            if (entry.getValue() == maxValueInMap)
-            {
+        for (Map.Entry<String, Integer> entry : arrayOfCounts.entrySet()) {
+            if (entry.getValue() == maxValueInMap) {
                 maxName = entry.getKey();
             }
         }
@@ -119,7 +113,7 @@ public class JiraApi {
         StringBuilder maxOfCounts = new StringBuilder();
         maxOfCounts.append(maxName).append(", ").append(maxValueInMap);
 
-        log.info("Максимальное кол-во за прошлый месяц - "+ maxOfCounts);
+        log.info("Максимальное кол-во за прошлый месяц - " + maxOfCounts);
 
         return maxOfCounts;
     }

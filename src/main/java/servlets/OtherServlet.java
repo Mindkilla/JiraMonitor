@@ -12,7 +12,7 @@ import java.io.IOException;
  * Created by Mindkilla on 02.01.2017.
  */
 @WebServlet("/other")
-public class OtherServlet extends HttpServlet{
+public class OtherServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,13 +23,13 @@ public class OtherServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         //Отпуска
-        request.setAttribute("countVacationL", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR+Consts.LEVAS ));
-        request.setAttribute("countVacationE", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR+Consts.ESIES ));
-        request.setAttribute("countVacationK", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR+Consts.KUAAE ));
+        request.setAttribute("countVacationL", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR + Consts.LEVAS) / 3600 / 8);
+        request.setAttribute("countVacationE", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR + Consts.ESIES) / 3600 / 8);
+        request.setAttribute("countVacationK", JiraApi.projectTimeCount(Consts.VACATION_CURRENT_YEAR + Consts.KUAAE) / 3600 / 8);
         //Простои
-        request.setAttribute("countInactivityL", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR+Consts.LEVAS ));
-        request.setAttribute("countInactivityE", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR+Consts.ESIES ));
-        request.setAttribute("countInactivityK", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR+Consts.KUAAE ));
+        request.setAttribute("countInactivityL", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR + Consts.LEVAS) / 3600);
+        request.setAttribute("countInactivityE", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR + Consts.ESIES) / 3600);
+        request.setAttribute("countInactivityK", JiraApi.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR + Consts.KUAAE) / 3600);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/other.jsp");
         dispatcher.forward(request, response);
