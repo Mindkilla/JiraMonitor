@@ -50,7 +50,7 @@
             <div class="col-md-3">
                 <div class="amazo-tile tile-success">
                     <div class="tile-heading">
-                        <div class="title">Использовано отпуска <b>за год</b></div>
+                        <div class="title">Использовано отпуска <b>за год, дней</b></div>
 
                     </div>
                     <div class="tile-body">
@@ -65,7 +65,7 @@
 			<div class="col-md-3">
                 <div class="amazo-tile tile-success">
                     <div class="tile-heading">
-                        <div class="title">Пропусков <b>за год</b></div>
+                        <div class="title">Простои <b>за год, часов</b></div>
 
                     </div>
                     <div class="tile-body">
