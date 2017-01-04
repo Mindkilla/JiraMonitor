@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *
+ * @author Andrey Smirnov
+ */
 @WebServlet("/monitor")
 public class JiraRestServlet extends HttpServlet {
 

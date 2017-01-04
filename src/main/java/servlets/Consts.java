@@ -1,7 +1,8 @@
 package servlets;
 
 /**
- * Created by smiana on 09.12.2016.
+ *
+ * @author Andrey Smirnov
  */
 public class Consts {
 

@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Mindkilla on 02.01.2017.
+ *
+ * @author Andrey Smirnov
  */
 @WebServlet("/other")
 public class OtherServlet extends HttpServlet {

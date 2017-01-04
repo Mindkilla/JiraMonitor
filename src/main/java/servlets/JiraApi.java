@@ -6,7 +6,8 @@ import org.apache.log4j.Logger;
 import java.util.*;
 
 /**
- * Created by Mindkilla on 10.12.2016.
+ *
+ * @author Andrey Smirnov
  */
 public class JiraApi {
     private static final Logger log = Logger.getLogger(JiraApi.class);
