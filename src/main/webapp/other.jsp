@@ -65,7 +65,7 @@
 			<div class="col-md-3">
                 <div class="amazo-tile tile-success">
                     <div class="tile-heading">
-                        <div class="title">Простои <b>за год, часов</b></div>
+                        <div class="title">Простои <b>за месяц, часов</b></div>
 
                     </div>
                     <div class="tile-body">

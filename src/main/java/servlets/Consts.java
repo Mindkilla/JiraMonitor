@@ -56,6 +56,6 @@ public class Consts {
     public static final String DEFECT_OPENED_NOW = "project = SUPP AND cf[14303] = 7 AND type not in (10405) AND resolution = Unresolved AND type in ";
 
     public static final String VACATION_CURRENT_YEAR = "project = SUPP_2_VACATION_DEIS AND resolutiondate <=endOfYear()  AND resolutiondate >=startOfYear() AND assignee =";
-    public static final String INACTIVITY_CURRENT_YEAR = "project = SUPP_2_INACTIVITY_DEIS AND resolutiondate <=endOfYear()  AND resolutiondate >=startOfYear() AND assignee =";
+    public static final String INACTIVITY_CURRENT_YEAR = "project = SUPP_2_INACTIVITY_DEIS AND resolutiondate <=endOfMonth()  AND resolutiondate >=startOfMonth() AND assignee =";
 
 }
