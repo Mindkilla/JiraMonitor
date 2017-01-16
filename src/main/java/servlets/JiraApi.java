@@ -2,14 +2,13 @@ package servlets;
 
 import net.rcarz.jiraclient.*;
 import org.apache.log4j.Logger;
-
 import java.util.*;
 
 /**
  *
  * @author Andrey Smirnov
  */
-public class JiraApi {
+class JiraApi {
     private static final Logger log = Logger.getLogger(JiraApi.class);
 
     //Connect to jira rest api
@@ -19,7 +18,7 @@ public class JiraApi {
     }
 
     //Count of issue
-    public static String issueCountRest(String jql) {
+    private static String issueCountRest(String jql) {
         int total = 0;
         try {
             Issue.SearchResult result = jiraConnect().searchIssues(jql, "project");
@@ -33,7 +32,7 @@ public class JiraApi {
     }
 
     //в секундах , можно форматировать результат при выводе куда-либо
-    public static Integer projectTimeCount(String jql) {
+    static Integer projectTimeCount(String jql) {
         int time = 0;
         try {
             Issue.SearchResult result = jiraConnect().searchIssues(jql);
@@ -51,12 +50,12 @@ public class JiraApi {
         return time;
     }
 
-    public static String issueCount(String str, String jql) {
+    static String issueCount(String str, String jql) {
         return str + " : " + issueCountRest(jql);
     }
 
     //Лидер по кол-ву решенных обращений за прошлый месяц
-    public static String maxCountMonthRest() {
+    static String maxCountMonthRest() {
         HashMap<String, Integer> arrayOfCounts = new HashMap<String, Integer>();
         arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.LEVAS)));
         arrayOfCounts.put(Consts.NAME_ANDREY, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.SMIANA)));

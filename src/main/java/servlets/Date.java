@@ -11,7 +11,7 @@ import java.util.Locale;
  */
 public class Date {
 
-    public static int getPrevMonth() {
+    private static int getPrevMonth() {
         DateTime date = new DateTime();
         if (date.getMonthOfYear() - 1 == 0) {
             return 12;
@@ -19,12 +19,12 @@ public class Date {
         return date.getMonthOfYear() - 1;
     }
 
-    public static String getMonthName() {
+    static String getMonthName() {
         LocalDate aDate = new LocalDate(getYear(), getPrevMonth(), 1);
         return aDate.monthOfYear().getAsText(Locale.getDefault());
     }
 
-    public static int getYear() {
+    private static int getYear() {
         DateTime date = new DateTime();
         if (getPrevMonth() == 12) {
             return date.getYear() - 1;
@@ -32,7 +32,7 @@ public class Date {
         return date.getYear();
     }
 
-    public static int getLastDayOfMonth() {
+    private static int getLastDayOfMonth() {
         int lastDay = 0;
         if ((getPrevMonth() >= 1) && (getPrevMonth() <= 12)) {
             LocalDate aDate = new LocalDate(getYear(), getPrevMonth(), 1);
@@ -41,11 +41,11 @@ public class Date {
         return lastDay;
     }
 
-    public static String dataEnd() {
+    static String dataEnd() {
         return Integer.toString(getYear()) + "-" + Integer.toString(getPrevMonth()) + "-" + Integer.toString(getLastDayOfMonth());
     }
 
-    public static String dataBegin() {
+    static String dataBegin() {
         return Integer.toString(getYear()) + "-" + Integer.toString(getPrevMonth()) + "-" + Integer.toString(1);
     }
 }
