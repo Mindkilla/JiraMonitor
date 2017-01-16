@@ -8,8 +8,8 @@ public class Consts {
 
     //Jira Api properties
     public static final String JIRA_URL = "https://jira.bssys.com";
-    public static final String JIRA_USER = "";
-    public static final String JIRA_PASSWORD = "";
+    public static final String JIRA_USER = "levas";
+    public static final String JIRA_PASSWORD = "1~IBj~bc";
 
     //Имена и логины
     public static final String LEVAS = " LevAS ";
@@ -24,12 +24,15 @@ public class Consts {
 
     //Типы обращений
     public static final String ISSUE_NAME = "Обращений : ";
-    public static final String DEFECT_NAME = "Дефектов : ";
-    public static final String CONSULT_NAME = "Консультаций : ";
-    public static final String WHISH_NAME = "Пожеланий : ";
+    public static final String DEFECT_NAME = "Дефектов";
+    public static final String CONSULT_NAME = "Консультаций";
+    public static final String WHISH_NAME = "Пожеланий";
     public static final String DEFECT = "(10300)";
     public static final String CONSULT = "(10304)";
     public static final String WHISH = "(10405)";
+    public static final String NEW = "Новых";
+    public static final String CLOSED = "Закрыто";
+    public static final String OPENED = "Открытые";
 
     //JQL-запросы
     //Открытых\Закрытых обращений за сегодня

@@ -71,7 +71,6 @@
                     <div class="tile-body">
                         <div class="content">
                             ${Levas}</br>
-                            ${Smiana}</br>
                             ${Esies}</br>
                             ${Kuaae}
                         </div>
@@ -93,7 +92,7 @@
                     </div>
                     <div class="tile-body">
 						<span class="content">
-						${LevasС}</br>${SmianaС}</br>${EsiesС}</br>${KuaaeС}</span>
+						${LevasС}</br>${EsiesС}</br>${KuaaeС}</span>
                     </div>
                     <div class="tile-footer text-center">
                         <span class="info-text text-right" style="color: #f04743"></span>

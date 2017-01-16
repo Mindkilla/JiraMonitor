@@ -51,58 +51,19 @@ public class JiraApi {
         return time;
     }
 
-    //Открытых\Закрытых обращений за сегодня
-    public static String issueNewToday() {
-        return "Новых : " + issueCountRest(Consts.ISSUE_NEW_TODAY);
-    }
-
-    public static String issueClosedToday() {
-        return "Закрыто: " + issueCountRest(Consts.ISSUE_CLOSED_TODAY);
-    }
-
-    //Кол-во АКТИВНЫХ обращений на данный момент для каждого
-    public static String issueActiveNow(String fName, String name) {
-        return fName + " : " + issueCountRest(Consts.ISSUE_ACTIVE_NOW + name);
-    }
-
-    //Кол-во ЗАКРЫТЫХ обращений за текущий месяц для каждого
-    public static String issueClosedMonth(String fName, String name) {
-        return fName + " : " + issueCountRest(Consts.ISSUE_CLOSED_MONTH + name);
-    }
-
-    //Все Открытые\Закрытые обращения за месяц
-    public static String issueOpenCurmonth() {
-        return "Открытые: " + issueCountRest(Consts.ISSUE_OPEN_CURMONTH);
-    }
-
-    public static String issueClosedCurmonth() {
-        return "Закрытые: " + issueCountRest(Consts.ISSUE_CLOSED_CURMONTH);
-    }
-
-    //Кол-во ЗАКРЫТЫХ дефектов (10300), консультаций(10304), пожеланий (10405) за месяц
-    public static String defectClosedMonth(String name, String jql) {
-        return name + issueCountRest(Consts.DEFECT_CLOSED_MONTH + jql);
-    }
-
-    //Кол-во ОТКРЫТЫХ дефектов(10300), консультаций(10304)
-    public static String defectOpenedNow(String name, String jql) {
-        return name + issueCountRest(Consts.DEFECT_OPENED_NOW + jql);
-    }
-
-    //Кол-во ЗАКРЫТЫХ обращений за предыдущий месяц для каждого
-    public static String issueClosedPMonth(String name) {
-        return issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + name);
+    public static String issueCount(String str, String jql) {
+        return str + " : " + issueCountRest(jql);
     }
 
     //Лидер по кол-ву решенных обращений за прошлый месяц
-    public static StringBuilder maxCountMonthRest() {
-        Hashtable<String, Integer> arrayOfCounts = new Hashtable<String, Integer>();
-        arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueClosedPMonth(Consts.LEVAS)));
-        arrayOfCounts.put(Consts.NAME_ANDREY, Integer.parseInt(issueClosedPMonth(Consts.SMIANA)));
-        arrayOfCounts.put(Consts.NAME_JOHN, Integer.parseInt(issueClosedPMonth(Consts.ESIES)));
-        arrayOfCounts.put(Consts.NAME_AIDAR, Integer.parseInt(issueClosedPMonth(Consts.KUAAE)));
+    public static String maxCountMonthRest() {
+        HashMap<String, Integer> arrayOfCounts = new HashMap<String, Integer>();
+        arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.LEVAS)));
+        arrayOfCounts.put(Consts.NAME_ANDREY, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.SMIANA)));
+        arrayOfCounts.put(Consts.NAME_JOHN, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.ESIES)));
+        arrayOfCounts.put(Consts.NAME_AIDAR, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.KUAAE)));
 
-        int maxValueInMap = (Collections.max(arrayOfCounts.values()));
+        int maxValueInMap = Collections.max(arrayOfCounts.values());
         String maxName = null;
 
         for (Map.Entry<String, Integer> entry : arrayOfCounts.entrySet()) {
@@ -116,6 +77,6 @@ public class JiraApi {
 
         log.info("Максимальное кол-во за прошлый месяц - " + maxOfCounts);
 
-        return maxOfCounts;
+        return maxOfCounts.toString();
     }
 }
