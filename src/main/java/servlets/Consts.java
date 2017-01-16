@@ -9,7 +9,7 @@ class Consts {
     //Jira Api properties
     static final String JIRA_URL = "https://jira.bssys.com";
     static final String JIRA_USER = "";
-    static final String JIRA_PASSWORD = "";
+    static final String JIRA_PASS = "";
 
     //Имена и логины
     static final String LEVAS = " LevAS ";
@@ -61,4 +61,5 @@ class Consts {
     static final String VACATION_CURRENT_YEAR = "project = SUPP_2_VACATION_DEIS AND resolutiondate <=endOfYear()  AND resolutiondate >=startOfYear() AND assignee =";
     static final String INACTIVITY_CURRENT_YEAR = "project = SUPP_2_INACTIVITY_DEIS AND resolutiondate <=endOfMonth()  AND resolutiondate >=startOfMonth() AND assignee =";
 
+    private Consts(){}
 }

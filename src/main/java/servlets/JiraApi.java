@@ -11,9 +11,11 @@ import java.util.*;
 class JiraApi {
     private static final Logger log = Logger.getLogger(JiraApi.class);
 
+    private JiraApi(){}
+
     //Connect to jira rest api
     private static JiraClient jiraConnect() {
-        BasicCredentials creds = new BasicCredentials(Consts.JIRA_USER, Consts.JIRA_PASSWORD);
+        BasicCredentials creds = new BasicCredentials(Consts.JIRA_USER, Consts.JIRA_PASS);
         return new JiraClient(Consts.JIRA_URL, creds);
     }
 
@@ -25,7 +27,7 @@ class JiraApi {
             total = result.total;
         } catch (JiraException ex) {
             if (ex.getCause() != null)
-                log.error(ex.getCause().getMessage());
+                log.error(ex + ex.getCause().getMessage());
         }
         log.info(jql + " - RESULT: " + total);
         return Integer.toString(total);
@@ -44,7 +46,7 @@ class JiraApi {
             }
         } catch (JiraException ex) {
             if (ex.getCause() != null)
-                log.error(ex.getCause().getMessage());
+                log.error(ex + ex.getCause().getMessage());
         }
         log.info(jql + " - RESULT: " + time);
         return time;

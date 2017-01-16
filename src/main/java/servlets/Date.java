@@ -10,6 +10,7 @@ import java.util.Locale;
  * @author Andrey Smirnov
  */
 public class Date {
+    private Date(){}
 
     private static int getPrevMonth() {
         DateTime date = new DateTime();
