@@ -8,8 +8,8 @@ public class Consts {
 
     //Jira Api properties
     public static final String JIRA_URL = "https://jira.bssys.com";
-    public static final String JIRA_USER = "levas";
-    public static final String JIRA_PASSWORD = "1~IBj~bc";
+    public static final String JIRA_USER = "";
+    public static final String JIRA_PASSWORD = "";
 
     //Имена и логины
     public static final String LEVAS = " LevAS ";
