@@ -1,4 +1,4 @@
-package servlets;
+package utils;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -6,47 +6,58 @@ import org.joda.time.LocalDate;
 import java.util.Locale;
 
 /**
- *
  * @author Andrey Smirnov
  */
-public class Date {
-    private Date(){}
+public class DateUtils
+{
+    private DateUtils()
+    {
+    }
 
-    private static int getPrevMonth() {
+    private static int getPrevMonth()
+    {
         DateTime date = new DateTime();
-        if (date.getMonthOfYear() - 1 == 0) {
+        if ( date.getMonthOfYear() - 1 == 0 )
+        {
             return 12;
         }
         return date.getMonthOfYear() - 1;
     }
 
-    static String getMonthName() {
+    public static String getMonthName()
+    {
         LocalDate aDate = new LocalDate(getYear(), getPrevMonth(), 1);
         return aDate.monthOfYear().getAsText(Locale.getDefault());
     }
 
-    private static int getYear() {
+    private static int getYear()
+    {
         DateTime date = new DateTime();
-        if (getPrevMonth() == 12) {
+        if ( getPrevMonth() == 12 )
+        {
             return date.getYear() - 1;
         }
         return date.getYear();
     }
 
-    private static int getLastDayOfMonth() {
+    private static int getLastDayOfMonth()
+    {
         int lastDay = 0;
-        if ((getPrevMonth() >= 1) && (getPrevMonth() <= 12)) {
+        if ( (getPrevMonth() >= 1) && (getPrevMonth() <= 12) )
+        {
             LocalDate aDate = new LocalDate(getYear(), getPrevMonth(), 1);
             lastDay = aDate.dayOfMonth().getMaximumValue();
         }
         return lastDay;
     }
 
-    static String dataEnd() {
+    public static String dataEnd()
+    {
         return Integer.toString(getYear()) + "-" + Integer.toString(getPrevMonth()) + "-" + Integer.toString(getLastDayOfMonth());
     }
 
-    static String dataBegin() {
+    public static String dataBegin()
+    {
         return Integer.toString(getYear()) + "-" + Integer.toString(getPrevMonth()) + "-" + Integer.toString(1);
     }
 }

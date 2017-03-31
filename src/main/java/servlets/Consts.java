@@ -1,26 +1,28 @@
 package servlets;
 
+import utils.DateUtils;
+
 /**
- *
  * @author Andrey Smirnov
  */
-class Consts {
+public class Consts
+{
 
     //Jira Api properties
-    static final String JIRA_URL = "https://jira.bssys.com";
-    static final String JIRA_USER = "";
-    static final String JIRA_PASS = "";
+    public static final String JIRA_URL = "https://jira.bssys.com";
+    public static final String JIRA_USER = "";
+    public static final String JIRA_PASS = "";
 
     //Имена и логины
-    static final String LEVAS = " LevAS ";
-    static final String SMIANA = " SmiAnA ";
-    static final String ESIES = " EsiES ";
-    static final String KUAAE = " KuaAE ";
+    public static final String LEVAS = " LevAS ";
+    public static final String SMIANA = " SmiAnA ";
+    public static final String ESIES = " EsiES ";
+    public static final String KUAAE = " KuaAE ";
 
-    static final String NAME_ALEX = "Саня";
-    static final String NAME_ANDREY = "Андрей";
-    static final String NAME_JOHN = "Женя";
-    static final String NAME_AIDAR = "Айдар";
+    public static final String NAME_ALEX = "Саня";
+    public static final String NAME_ANDREY = "Андрей";
+    public static final String NAME_JOHN = "Женя";
+    public static final String NAME_AIDAR = "Айдар";
 
     //Типы обращений
     static final String ISSUE_NAME = "Обращений : ";
@@ -46,7 +48,7 @@ class Consts {
     static final String ISSUE_CLOSED_MONTH = "project=SUPP AND resolution=10407 and updatedDate>=startOfMonth(1d) AND updateddate<= endOfMonth() AND type not in (10405) AND assignee =";
 
     //Кол-во ЗАКРЫТЫХ обращений (10405) за прошлый месяц для каждого
-    static final String ISSUE_CLOSED_PRMONTH = "project=SUPP AND resolution=10407 and updatedDate>="+Date.dataBegin()+" AND updateddate<="+Date.dataEnd()+" AND type not in (10405) AND assignee =";
+    public static final String ISSUE_CLOSED_PRMONTH = "project=SUPP AND resolution=10407 and updatedDate>=" + DateUtils.dataBegin() + " AND updateddate<=" + DateUtils.dataEnd() + " AND type not in (10405) AND assignee =";
 
     //Все Открытые\Закрытые обращения за месяц
     static final String ISSUE_OPEN_CURMONTH = "project = SUPP AND cf[14303] = 7 AND type not in (10405) AND resolution = Unresolved";
@@ -61,5 +63,7 @@ class Consts {
     static final String VACATION_CURRENT_YEAR = "project = SUPP_2_VACATION_DEIS AND resolutiondate <=endOfYear()  AND resolutiondate >=startOfYear() AND assignee =";
     static final String INACTIVITY_CURRENT_YEAR = "project = SUPP_2_INACTIVITY_DEIS AND resolutiondate <=endOfMonth()  AND resolutiondate >=startOfMonth() AND assignee =";
 
-    private Consts(){}
+    private Consts()
+    {
+    }
 }

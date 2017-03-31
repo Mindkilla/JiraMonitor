@@ -1,63 +1,84 @@
-package servlets;
+package utils;
 
 import net.rcarz.jiraclient.*;
 import org.apache.log4j.Logger;
+import servlets.Consts;
+
 import java.util.*;
 
 /**
- *
  * @author Andrey Smirnov
  */
-class JiraApi {
-    private static final Logger log = Logger.getLogger(JiraApi.class);
+public class JiraApiUtils
+{
+    private static final Logger log = Logger.getLogger(JiraApiUtils.class);
 
-    private JiraApi(){}
+    private JiraApiUtils()
+    {
+    }
 
     //Connect to jira rest api
-    private static JiraClient jiraConnect() {
+    private static JiraClient jiraConnect()
+    {
         BasicCredentials creds = new BasicCredentials(Consts.JIRA_USER, Consts.JIRA_PASS);
         return new JiraClient(Consts.JIRA_URL, creds);
     }
 
     //Count of issue
-    private static String issueCountRest(String jql) {
+    private static String issueCountRest(String jql)
+    {
         int total = 0;
-        try {
+        try
+        {
             Issue.SearchResult result = jiraConnect().searchIssues(jql, "project");
             total = result.total;
-        } catch (JiraException ex) {
-            if (ex.getCause() != null)
+        }
+        catch ( JiraException ex )
+        {
+            if ( ex.getCause() != null )
+            {
                 log.error(ex + ex.getCause().getMessage());
+            }
         }
         log.info(jql + " - RESULT: " + total);
         return Integer.toString(total);
     }
 
     //в секундах , можно форматировать результат при выводе куда-либо
-    static Integer projectTimeCount(String jql) {
+    public static Integer projectTimeCount(String jql)
+    {
         int time = 0;
-        try {
+        try
+        {
             Issue.SearchResult result = jiraConnect().searchIssues(jql);
-            if (result.issues.isEmpty()) {
+            if ( result.issues.isEmpty() )
+            {
                 time = 0;
             }
-            for (int i = 0; i < result.issues.size(); i++) {
+            for ( int i = 0; i < result.issues.size(); i++ )
+            {
                 time = time + result.issues.get(i).getTimeSpent();
             }
-        } catch (JiraException ex) {
-            if (ex.getCause() != null)
+        }
+        catch ( JiraException ex )
+        {
+            if ( ex.getCause() != null )
+            {
                 log.error(ex + ex.getCause().getMessage());
+            }
         }
         log.info(jql + " - RESULT: " + time);
         return time;
     }
 
-    static String issueCount(String str, String jql) {
+    public static String issueCount(String str, String jql)
+    {
         return str + " : " + issueCountRest(jql);
     }
 
     //Лидер по кол-ву решенных обращений за прошлый месяц
-    static String maxCountMonthRest() {
+    public static String maxCountMonthRest()
+    {
         HashMap<String, Integer> arrayOfCounts = new HashMap<String, Integer>();
         arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.LEVAS)));
         arrayOfCounts.put(Consts.NAME_ANDREY, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.SMIANA)));
@@ -67,8 +88,10 @@ class JiraApi {
         int maxValueInMap = Collections.max(arrayOfCounts.values());
         String maxName = null;
 
-        for (Map.Entry<String, Integer> entry : arrayOfCounts.entrySet()) {
-            if (entry.getValue() == maxValueInMap) {
+        for ( Map.Entry<String, Integer> entry : arrayOfCounts.entrySet() )
+        {
+            if ( entry.getValue() == maxValueInMap )
+            {
                 maxName = entry.getKey();
             }
         }

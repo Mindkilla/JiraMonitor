@@ -11,8 +11,8 @@ import java.io.IOException;
 /**
  * @author Andrey Smirnov
  */
-@WebServlet("/other")
-public class OtherServlet extends HttpServlet
+@WebServlet("/monitor")
+public class MainServlet extends HttpServlet
 {
 
     @Override
@@ -25,8 +25,8 @@ public class OtherServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setContentType("text/html");
-        AllServletActions.fillPageWithData(OtherServlet.class, request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/other.jsp");
+        AllServletActions.fillPageWithData(MainServlet.class, request);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }
 }
