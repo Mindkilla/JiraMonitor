@@ -18,11 +18,13 @@ public class Consts
     public static final String SMIANA = " SmiAnA ";
     public static final String ESIES = " EsiES ";
     public static final String KUAAE = " KuaAE ";
+    public static final String ZHEEV = " ZheEV ";
 
     public static final String NAME_ALEX = "Саня";
     public static final String NAME_ANDREY = "Андрей";
     public static final String NAME_JOHN = "Женя";
     public static final String NAME_AIDAR = "Айдар";
+    public static final String NAME_ZH = "Жека";
 
     //Типы обращений
     static final String ISSUE_NAME = "Обращений : ";

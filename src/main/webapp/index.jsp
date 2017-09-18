@@ -70,9 +70,10 @@
                     </div>
                     <div class="tile-body">
                         <div class="content">
-                            ${Levas}</br>
+                            ${Kuaae}</br>
+                            ${Zheev}</br>
                             ${Esies}</br>
-                            ${Kuaae}
+                            ${Levas}
                         </div>
                     </div>
                     <div class="tile-footer">
@@ -92,7 +93,10 @@
                     </div>
                     <div class="tile-body">
 						<span class="content">
-						${LevasС}</br>${EsiesС}</br>${KuaaeС}</span>
+						${KuaaeС}</br>
+						${ZheevС}</br>
+						${EsiesС}</br>
+						${LevasС}</span>
                     </div>
                     <div class="tile-footer text-center">
                         <span class="info-text text-right" style="color: #f04743"></span>

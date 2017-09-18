@@ -18,19 +18,19 @@ public class JiraApiUtils
     }
 
     //Connect to jira rest api
-    private static JiraClient jiraConnect()
+    public static JiraClient jiraConnect()
     {
         BasicCredentials creds = new BasicCredentials(Consts.JIRA_USER, Consts.JIRA_PASS);
         return new JiraClient(Consts.JIRA_URL, creds);
     }
 
     //Count of issue
-    private static String issueCountRest(String jql)
+    private static String issueCountRest(JiraClient jiraClient, String jql)
     {
         int total = 0;
         try
         {
-            Issue.SearchResult result = jiraConnect().searchIssues(jql, "project");
+            Issue.SearchResult result = jiraClient.searchIssues(jql, "project");
             total = result.total;
         }
         catch ( JiraException ex )
@@ -45,12 +45,12 @@ public class JiraApiUtils
     }
 
     //в секундах , можно форматировать результат при выводе куда-либо
-    public static Integer projectTimeCount(String jql)
+    public static Integer projectTimeCount(JiraClient jiraClient, String jql)
     {
         int time = 0;
         try
         {
-            Issue.SearchResult result = jiraConnect().searchIssues(jql);
+            Issue.SearchResult result = jiraClient.searchIssues(jql);
             if ( result.issues.isEmpty() )
             {
                 time = 0;
@@ -71,19 +71,19 @@ public class JiraApiUtils
         return time;
     }
 
-    public static String issueCount(String str, String jql)
+    public static String issueCount(JiraClient jiraClient, String str, String jql)
     {
-        return str + " : " + issueCountRest(jql);
+        return str + " : " + issueCountRest(jiraClient, jql);
     }
 
     //Лидер по кол-ву решенных обращений за прошлый месяц
-    public static String maxCountMonthRest()
+    public static String maxCountMonthRest(JiraClient jiraClient)
     {
         HashMap<String, Integer> arrayOfCounts = new HashMap<String, Integer>();
-        arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.LEVAS)));
-        arrayOfCounts.put(Consts.NAME_ANDREY, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.SMIANA)));
-        arrayOfCounts.put(Consts.NAME_JOHN, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.ESIES)));
-        arrayOfCounts.put(Consts.NAME_AIDAR, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.KUAAE)));
+        arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueCountRest(jiraClient, Consts.ISSUE_CLOSED_PRMONTH + Consts.LEVAS)));
+        arrayOfCounts.put(Consts.NAME_ZH, Integer.parseInt(issueCountRest(jiraClient, Consts.ISSUE_CLOSED_PRMONTH + Consts.ZHEEV)));
+        arrayOfCounts.put(Consts.NAME_JOHN, Integer.parseInt(issueCountRest(jiraClient, Consts.ISSUE_CLOSED_PRMONTH + Consts.ESIES)));
+        arrayOfCounts.put(Consts.NAME_AIDAR, Integer.parseInt(issueCountRest(jiraClient, Consts.ISSUE_CLOSED_PRMONTH + Consts.KUAAE)));
 
         int maxValueInMap = Collections.max(arrayOfCounts.values());
         String maxName = null;
