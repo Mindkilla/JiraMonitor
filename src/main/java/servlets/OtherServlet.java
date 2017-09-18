@@ -25,7 +25,7 @@ public class OtherServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setContentType("text/html");
-        AllServletActions.fillPageWithData(OtherServlet.class, request);
+        AllServletActions.fillPageWithData("other", request);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/other.jsp");
         dispatcher.forward(request, response);
     }

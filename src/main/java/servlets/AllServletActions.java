@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AllServletActions
 {
 
-    public static void fillPageWithData(Object whoCallMe, HttpServletRequest request)
+    public static void fillPageWithData(String whoCallMe, HttpServletRequest request)
     {
-        if ( whoCallMe instanceof MainServlet )
+        if ( "main".equals(whoCallMe) )
         {
             //Открытых\Закрытых обращений за сегодня
             request.setAttribute("issueNewToday", JiraApiUtils.issueCount(Consts.NEW, Consts.ISSUE_NEW_TODAY));
