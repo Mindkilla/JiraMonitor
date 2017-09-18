@@ -22,10 +22,12 @@ public class AllServletActions
             request.setAttribute("Levas", JiraApiUtils.issueCount(Consts.NAME_ALEX, Consts.ISSUE_ACTIVE_NOW + Consts.LEVAS));
             request.setAttribute("Esies", JiraApiUtils.issueCount(Consts.NAME_JOHN, Consts.ISSUE_ACTIVE_NOW + Consts.ESIES));
             request.setAttribute("Kuaae", JiraApiUtils.issueCount(Consts.NAME_AIDAR, Consts.ISSUE_ACTIVE_NOW + Consts.KUAAE));
+            request.setAttribute("Zheev", JiraApiUtils.issueCount(Consts.NAME_ZH, Consts.ISSUE_ACTIVE_NOW + Consts.ZHEEV));
             //Кол-во ЗАКРЫТЫХ обращений за текущий месяц для каждого
             request.setAttribute("LevasС", JiraApiUtils.issueCount(Consts.NAME_ALEX, Consts.ISSUE_CLOSED_MONTH + Consts.LEVAS));
             request.setAttribute("EsiesС", JiraApiUtils.issueCount(Consts.NAME_JOHN, Consts.ISSUE_CLOSED_MONTH + Consts.ESIES));
             request.setAttribute("KuaaeС", JiraApiUtils.issueCount(Consts.NAME_AIDAR, Consts.ISSUE_CLOSED_MONTH + Consts.KUAAE));
+            request.setAttribute("ZheevС", JiraApiUtils.issueCount(Consts.NAME_ZH, Consts.ISSUE_CLOSED_MONTH + Consts.ZHEEV));
             //Лидер по кол-ву решенных обращений за прошлый месяц
             request.setAttribute("Month", DateUtils.getMonthName());
             request.setAttribute("Max", JiraApiUtils.maxCountMonthRest());
@@ -46,10 +48,12 @@ public class AllServletActions
             request.setAttribute("countVacationL", JiraApiUtils.projectTimeCount(Consts.VACATION_CURRENT_YEAR + Consts.LEVAS) / 3600 / 8);
             request.setAttribute("countVacationE", JiraApiUtils.projectTimeCount(Consts.VACATION_CURRENT_YEAR + Consts.ESIES) / 3600 / 8);
             request.setAttribute("countVacationK", JiraApiUtils.projectTimeCount(Consts.VACATION_CURRENT_YEAR + Consts.KUAAE) / 3600 / 8);
+            request.setAttribute("countVacationZh", JiraApiUtils.projectTimeCount(Consts.VACATION_CURRENT_YEAR + Consts.ZHEEV) / 3600 / 8);
             //Простои
             request.setAttribute("countInactivityL", JiraApiUtils.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR + Consts.LEVAS) / 3600);
             request.setAttribute("countInactivityE", JiraApiUtils.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR + Consts.ESIES) / 3600);
             request.setAttribute("countInactivityK", JiraApiUtils.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR + Consts.KUAAE) / 3600);
+            request.setAttribute("countInactivityZh", JiraApiUtils.projectTimeCount(Consts.INACTIVITY_CURRENT_YEAR + Consts.ZHEEV) / 3600);
         }
     }
 

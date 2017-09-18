@@ -81,7 +81,7 @@ public class JiraApiUtils
     {
         HashMap<String, Integer> arrayOfCounts = new HashMap<String, Integer>();
         arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.LEVAS)));
-        arrayOfCounts.put(Consts.NAME_ANDREY, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.SMIANA)));
+        arrayOfCounts.put(Consts.NAME_ZH, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.ZHEEV)));
         arrayOfCounts.put(Consts.NAME_JOHN, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.ESIES)));
         arrayOfCounts.put(Consts.NAME_AIDAR, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.KUAAE)));
 

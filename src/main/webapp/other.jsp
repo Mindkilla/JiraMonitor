@@ -54,7 +54,11 @@
 
                     </div>
                     <div class="tile-body">
-                        <div class="content">Саня: ${countVacationL}</br>Женя: ${countVacationE}</br> Айдар: ${countVacationK}</div>
+                        <div class="content">Айдар: ${countVacationK}</br>
+                            Жека: ${countVacationZh}</br>
+                            Женя: ${countVacationE}</br>
+                            Саня: ${countVacationL}
+                        </div>
                     </div>
                     <div class="tile-footer">
 
@@ -69,9 +73,12 @@
 
                     </div>
                     <div class="tile-body">
-                        <div class="content"> Саня: ${countInactivityL}</br>
+                        <div class="content">
+                            Айдар: ${countInactivityK}</br>
+                            Жека: ${countVacationZh}</br>
                             Женя: ${countInactivityE}</br>
-                            Айдар: ${countInactivityK}</div>
+                            Саня: ${countInactivityL}
+                        </div>
                     </div>
                     <div class="tile-footer">
 
