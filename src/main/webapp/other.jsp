@@ -54,11 +54,7 @@
 
                     </div>
                     <div class="tile-body">
-                        <div class="content">Айдар: ${countVacationK}</br>
-                            Жека: ${countVacationZh}</br>
-                            Женя: ${countVacationE}</br>
-                            Саня: ${countVacationL}
-                        </div>
+                        <div class="content">${vacation}</div>
                     </div>
                     <div class="tile-footer">
 
@@ -74,10 +70,7 @@
                     </div>
                     <div class="tile-body">
                         <div class="content">
-                            Айдар: ${countInactivityK}</br>
-                            Жека: ${countVacationZh}</br>
-                            Женя: ${countInactivityE}</br>
-                            Саня: ${countInactivityL}
+                            ${inactivity}
                         </div>
                     </div>
                     <div class="tile-footer">

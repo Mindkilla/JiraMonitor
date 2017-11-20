@@ -19,6 +19,89 @@ public class JiraApiUtils
 
     private static JiraClient connect;
 
+    //ОТКРЫТЫХ\ЗАКРЫТЫХ ОБРАЩЕНИЙ ЗА СЕГОДНЯ
+    public static String todayIssues(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.NEW, Consts.ISSUE_NEW_TODAY);
+        userJql.put(Consts.CLOSED, Consts.ISSUE_CLOSED_TODAY);
+        return issueCount(userJql);
+    }
+
+    //КОЛ-ВО АКТИВНЫХ ОБРАЩЕНИЙ НА ДАННЫЙ МОМЕНТ
+    public static String getCurrentActive(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.NAME_AIDAR,Consts.ISSUE_ACTIVE_NOW +Consts.KUAAE);
+        userJql.put(Consts.NAME_ZH,Consts.ISSUE_ACTIVE_NOW +Consts.ZHEEV);
+        userJql.put(Consts.NAME_JOHN,Consts.ISSUE_ACTIVE_NOW +Consts.ESIES);
+        userJql.put(Consts.NAME_ALEX,Consts.ISSUE_ACTIVE_NOW +Consts.LEVAS);
+        return issueCount(userJql);
+    }
+
+    //КОЛ-ВО ЗАКРЫТЫХ ОБРАЩЕНИЙ ЗА ТЕКУЩИЙ МЕСЯЦ
+    public static String getCurrentClosed(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.NAME_AIDAR, Consts.ISSUE_CLOSED_MONTH + Consts.KUAAE);
+        userJql.put(Consts.NAME_ZH, Consts.ISSUE_CLOSED_MONTH + Consts.ZHEEV);
+        userJql.put(Consts.NAME_JOHN, Consts.ISSUE_CLOSED_MONTH + Consts.ESIES);
+        userJql.put(Consts.NAME_ALEX, Consts.ISSUE_CLOSED_MONTH + Consts.LEVAS);
+        return issueCount(userJql);
+    }
+
+    //КОЛ-ВО ОБРАЩЕНИЙ ЗА ТЕК.МЕСЯЦ
+    public static String getIssueCurrMonth(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.OPENED, Consts.ISSUE_OPEN_CURMONTH);
+        userJql.put(Consts.CLOSED, Consts.ISSUE_CLOSED_CURMONTH);
+        return issueCount(userJql);
+    }
+
+    //ЗАКРЫТЫЕ Дефекты консультации пожелания
+    public static String getIssueClosedCurrMonth(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.DEFECT_NAME, Consts.DEFECT_CLOSED_MONTH + Consts.DEFECT);
+        userJql.put(Consts.CONSULT_NAME, Consts.DEFECT_CLOSED_MONTH + Consts.CONSULT);
+        userJql.put(Consts.WHISH_NAME, Consts.DEFECT_CLOSED_MONTH + Consts.WHISH);
+        return issueCount(userJql);
+    }
+
+    //КОЛ-ВО ОТКРЫТЫХ ОБРАЩЕНИЙ ПО КАТЕГОРИЯМ
+    public static String getIssueOpenedCurrMonth(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.DEFECT_NAME, Consts.DEFECT_OPENED_NOW + Consts.DEFECT);
+        userJql.put(Consts.CONSULT_NAME, Consts.DEFECT_OPENED_NOW + Consts.CONSULT);
+        return issueCount(userJql);
+    }
+
+    //Отпуска
+    public static String getVacation(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.NAME_AIDAR, Consts.VACATION_CURRENT_YEAR + Consts.KUAAE);
+        userJql.put(Consts.NAME_ZH, Consts.VACATION_CURRENT_YEAR + Consts.ZHEEV);
+        userJql.put(Consts.NAME_JOHN, Consts.VACATION_CURRENT_YEAR + Consts.ESIES);
+        userJql.put(Consts.NAME_ALEX, Consts.VACATION_CURRENT_YEAR + Consts.LEVAS);
+        return projectTimeCount(userJql, "day");
+    }
+
+    //Простои
+    public static String getInactivity(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.NAME_AIDAR, Consts.INACTIVITY_CURRENT_YEAR + Consts.KUAAE);
+        userJql.put(Consts.NAME_ZH, Consts.INACTIVITY_CURRENT_YEAR + Consts.ZHEEV);
+        userJql.put(Consts.NAME_JOHN, Consts.INACTIVITY_CURRENT_YEAR + Consts.ESIES);
+        userJql.put(Consts.NAME_ALEX, Consts.INACTIVITY_CURRENT_YEAR + Consts.LEVAS);
+        return projectTimeCount(userJql, "hour");
+    }
+
+    //Лидер за прошлый месяц
+    public static String getLider(){
+        HashMap<String, String> userJql = new HashMap<>();
+        userJql.put(Consts.NAME_ALEX, Consts.ISSUE_CLOSED_PRMONTH + Consts.LEVAS);
+        userJql.put(Consts.NAME_ZH, Consts.ISSUE_CLOSED_PRMONTH + Consts.ZHEEV);
+        userJql.put(Consts.NAME_JOHN, Consts.ISSUE_CLOSED_PRMONTH + Consts.ESIES);
+        userJql.put(Consts.NAME_AIDAR, Consts.ISSUE_CLOSED_PRMONTH + Consts.KUAAE);
+        return maxCountMonthRest(userJql);
+    }
+
     //Connect to jira rest api
     public static void jiraConnect()
     {
@@ -26,24 +109,56 @@ public class JiraApiUtils
         connect =  new JiraClient(Consts.JIRA_URL, creds);
     }
 
-    //Count of issue
-    private static String issueCountRest(String jql)
+    private static String issueCount(Map<String, String> userJql)
     {
-        int total = 0;
-        try
+        return issueCountStr(userJql);
+    }
+
+    //Count of issue
+    private static String issueCountStr(Map<String, String> userJql)
+    {
+        StringBuilder total = new StringBuilder();
+        for ( Map.Entry<String, String> entry : userJql.entrySet() )
         {
-            Issue.SearchResult result = connect.searchIssues(jql, "project");
-            total = result.total;
-        }
-        catch ( JiraException ex )
-        {
-            if ( ex.getCause() != null )
+            try
             {
-                log.error(ex + ex.getCause().getMessage());
+                Issue.SearchResult result = connect.searchIssues(entry.getValue(), "project");
+                total.append(entry.getKey());
+                total.append(" : ");
+                total.append(result.total);
+                total.append("</br>");
+            }
+            catch ( JiraException ex )
+            {
+                if ( ex.getCause() != null )
+                {
+                    log.error(ex + ex.getCause().getMessage());
+                }
             }
         }
-        log.info(jql + " - RESULT: " + total);
-        return Integer.toString(total);
+        return total.toString();
+    }
+
+    //Count of issue to Map
+    private static HashMap<String, Integer> issueCountMap(Map<String, String> userJql)
+    {
+        HashMap<String, Integer> total = new HashMap<>();
+        for ( Map.Entry<String, String> entry : userJql.entrySet() )
+        {
+            try
+            {
+                Issue.SearchResult result = connect.searchIssues(entry.getValue(), "project");
+                total.put(entry.getKey(), result.total);
+            }
+            catch ( JiraException ex )
+            {
+                if ( ex.getCause() != null )
+                {
+                    log.error(ex + ex.getCause().getMessage());
+                }
+            }
+        }
+        return total;
     }
 
     //в секундах , можно форматировать результат при выводе куда-либо
@@ -73,20 +188,53 @@ public class JiraApiUtils
         return time;
     }
 
-    public static String issueCount(String str, String jql)
+    private static String projectTimeCount(Map<String, String> userJql, String metric)
     {
-        return str + " : " + issueCountRest(jql);
+        StringBuilder time = new StringBuilder();
+        for ( Map.Entry<String, String> entry : userJql.entrySet() )
+        {
+            int timeInSec = 0;
+            try
+            {
+                Issue.SearchResult result = connect.searchIssues(entry.getValue());
+                if ( result.issues.isEmpty() )
+                {
+                    time.append(entry.getKey());
+                    time.append(" : ");
+                    time.append("0");
+                    time.append("</br>");
+                    continue;
+                }
+                for ( int i = 0; i < result.issues.size(); i++ )
+                {
+                    timeInSec = timeInSec + result.issues.get(i).getTimeSpent();
+                }
+                time.append(entry.getKey());
+                time.append(" : ");
+                if (metric.equals("day")){
+                    int days = ((timeInSec / 3600) / 8);
+                    time.append(days);
+                }
+                else {
+                    time.append(timeInSec / 3600);
+                }
+                time.append("</br>");
+            }
+            catch ( JiraException ex )
+            {
+                if ( ex.getCause() != null )
+                {
+                    log.error(ex + ex.getCause().getMessage());
+                }
+            }
+        }
+        return time.toString();
     }
 
     //Лидер по кол-ву решенных обращений за прошлый месяц
-    public static String maxCountMonthRest()
+    private static String maxCountMonthRest(Map<String, String> userJql)
     {
-        HashMap<String, Integer> arrayOfCounts = new HashMap<>();
-        arrayOfCounts.put(Consts.NAME_ALEX, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.LEVAS)));
-        arrayOfCounts.put(Consts.NAME_ZH, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.ZHEEV)));
-        arrayOfCounts.put(Consts.NAME_JOHN, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.ESIES)));
-        arrayOfCounts.put(Consts.NAME_AIDAR, Integer.parseInt(issueCountRest(Consts.ISSUE_CLOSED_PRMONTH + Consts.KUAAE)));
-
+        HashMap<String, Integer> arrayOfCounts = issueCountMap(userJql);
         int maxValueInMap = Collections.max(arrayOfCounts.values());
         String maxName = null;
 

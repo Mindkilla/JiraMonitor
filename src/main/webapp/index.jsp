@@ -54,8 +54,7 @@
 
                     </div>
                     <div class="tile-body">
-                        <div class="content"> ${issueNewToday}</br>
-                            ${issueClosedToday}</div>
+                        <div class="content">${todayIssues}</div>
                     </div>
                     <div class="tile-footer">
 
@@ -70,10 +69,7 @@
                     </div>
                     <div class="tile-body">
                         <div class="content">
-                            ${Kuaae}</br>
-                            ${Zheev}</br>
-                            ${Esies}</br>
-                            ${Levas}
+                            ${currentActive}
                         </div>
                     </div>
                     <div class="tile-footer">
@@ -93,10 +89,7 @@
                     </div>
                     <div class="tile-body">
 						<span class="content">
-						${KuaaeС}</br>
-						${ZheevС}</br>
-						${EsiesС}</br>
-						${LevasС}</span>
+						${currentClosed}</span>
                     </div>
                     <div class="tile-footer text-center">
                         <span class="info-text text-right" style="color: #f04743"></span>
@@ -111,10 +104,10 @@
                 <div class="amazo-tile tile-white">
                     <div class="tile-heading">
                         <span class="title">Лидер по кол-ву решенных заявок за ПРОШЛЫЙ месяц</span>
-                        <span class="secondary">${Month}</span>
+                        <span class="secondary">${month}</span>
                     </div>
                     <div class="tile-body">
-                        <span class="content">${Max}</span>
+                        <span class="content">${max}</span>
                     </div>
                     <div class="tile-footer">
                         <span class="info-text text-right" style="color: #94c355"></span>
@@ -130,10 +123,10 @@
             <div class="amazo-tile tile-info" href="#">
                 <div class="tile-heading">
                     <div class="title">Кол-во <b>ЗАКРЫТЫХ обращений</b> за тек.месяц</div>
-                    <span class="secondary">${issueOpenCurmonth}</br>${issueClosedCurmonth}</span>
+                    <span class="secondary">${issueCurmonth}</span>
                 </div>
                 <div class="tile-body">
-                    <div class="content">${defectClosedMonth}</br>${consultClosedMonth}</br>${whishClosedMonth}</div>
+                    <div class="content">${issueClosedMonth}</div>
                 </div>
                 <div class="tile-footer">
                     <span class="info-text text-right"></span>
@@ -147,10 +140,10 @@
             <div class="amazo-tile tile-info" href="#">
                 <div class="tile-heading">
                     <div class="title">Кол-во <b>ОТКРЫТЫХ обращений</b> по категориям</div>
-                    <span class="secondary">${issueOpenCurmonth}</br>${issueClosedCurmonth}</span>
+                    <span class="secondary">${issueCurmonth}</span>
                 </div>
                 <div class="tile-body">
-                    <div class="content">${defectOpenNow}</br>${consultOpenNow}</div>
+                    <div class="content">${issueOpenedNow}</div>
                 </div>
                 <div class="tile-footer">
                     <span class="info-text text-right"></span>
