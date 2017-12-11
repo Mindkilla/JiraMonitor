@@ -1,17 +1,21 @@
 package utils;
 
-import net.rcarz.jiraclient.*;
+import net.rcarz.jiraclient.BasicCredentials;
+import net.rcarz.jiraclient.Issue;
+import net.rcarz.jiraclient.JiraClient;
+import net.rcarz.jiraclient.JiraException;
 import org.apache.log4j.Logger;
-import servlets.Consts;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Andrey Smirnov
  */
 public class JiraApiUtils
 {
-    private static final Logger log = Logger.getLogger(JiraApiUtils.class);
+    private static final Logger LOGGER = Logger.getLogger(JiraApiUtils.class);
 
     private JiraApiUtils()
     {
@@ -126,13 +130,13 @@ public class JiraApiUtils
                 total.append(entry.getKey());
                 total.append(" : ");
                 total.append(result.total);
-                total.append("</br>");
+                total.append(Consts.BR);
             }
             catch ( JiraException ex )
             {
                 if ( ex.getCause() != null )
                 {
-                    log.error(ex + ex.getCause().getMessage());
+                    LOGGER.error(ex + ex.getCause().getMessage());
                 }
             }
         }
@@ -154,7 +158,7 @@ public class JiraApiUtils
             {
                 if ( ex.getCause() != null )
                 {
-                    log.error(ex + ex.getCause().getMessage());
+                    LOGGER.error(ex + ex.getCause().getMessage());
                 }
             }
         }
@@ -181,10 +185,10 @@ public class JiraApiUtils
         {
             if ( ex.getCause() != null )
             {
-                log.error(ex + ex.getCause().getMessage());
+                LOGGER.error(ex + ex.getCause().getMessage());
             }
         }
-        log.info(jql + " - RESULT: " + time);
+        LOGGER.info(jql + " - RESULT: " + time);
         return time;
     }
 
@@ -202,7 +206,7 @@ public class JiraApiUtils
                     time.append(entry.getKey());
                     time.append(" : ");
                     time.append("0");
-                    time.append("</br>");
+                    time.append(Consts.BR);
                     continue;
                 }
                 for ( int i = 0; i < result.issues.size(); i++ )
@@ -218,13 +222,13 @@ public class JiraApiUtils
                 else {
                     time.append(timeInSec / 3600);
                 }
-                time.append("</br>");
+                time.append(Consts.BR);
             }
             catch ( JiraException ex )
             {
                 if ( ex.getCause() != null )
                 {
-                    log.error(ex + ex.getCause().getMessage());
+                    LOGGER.error(ex + ex.getCause().getMessage());
                 }
             }
         }
@@ -249,7 +253,7 @@ public class JiraApiUtils
         StringBuilder maxOfCounts = new StringBuilder();
         maxOfCounts.append(maxName).append(", ").append(maxValueInMap);
 
-        log.info("Максимальное кол-во за прошлый месяц - " + maxOfCounts);
+        LOGGER.info("Максимальное кол-во за прошлый месяц - " + maxOfCounts);
 
         return maxOfCounts.toString();
     }

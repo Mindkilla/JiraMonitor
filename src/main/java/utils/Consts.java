@@ -1,6 +1,9 @@
-package servlets;
+package utils;
 
-import utils.DateUtils;
+import bot.Emoji;
+import jersey.repackaged.com.google.common.collect.ImmutableList;
+
+import java.util.List;
 
 /**
  * @author Andrey Smirnov
@@ -9,22 +12,43 @@ public class Consts
 {
 
     //Jira Api properties
-    public static final String JIRA_URL = "https://jira.bssys.com";
+    public static final String JIRA_URL = "";
     public static final String JIRA_USER = "";
     public static final String JIRA_PASS = "";
 
-    //Имена и логины
+    //Telegram Bot Credentials
+    public static final String BOT_USERNAME = "";
+    public static final String BOT_TOKEN = "";
+
+    //Names
     public static final String LEVAS = " LevAS ";
     public static final String SMIANA = " SmiAnA ";
     public static final String ESIES = " EsiES ";
     public static final String KUAAE = " KuaAE ";
     public static final String ZHEEV = " ZheEV ";
+    public static final List<String> Users = ImmutableList.of("levas", "smiana", "esies", "kuaae", "zheev");
 
     public static final String NAME_ALEX = "Саня";
     public static final String NAME_ANDREY = "Андрей";
     public static final String NAME_JOHN = "Женя";
     public static final String NAME_AIDAR = "Айдар";
     public static final String NAME_ZH = "Жека";
+
+    //Bot messages
+    public static final String START_MSG = "Этот бот предназначен для сервиса Jira Монитор [bss.kz]" + "\r\n"
+            + "Чтобы получить доступ к возможностям бота отправьте свой логин от учетной записи!";
+    public static final String REG_OK_MSG = "Успешно! Теперь Вам доступны все возможности бота JiraMonitor Bot!";
+    public static final String UNKNOWN_MSG = "Что вы от меня хотите" + Emoji.DISAPPOINTED_BUT_RELIEVED_FACE;
+    public static final String ERROR_MSG = "У Вас нет доступа к данному функционалу!" +
+            "Чтобы получить доступ к возможностям бота отправьте свой логин от учетной записи!";
+
+    //Bot Commands
+    public static final String ACTIVE_CMD = "Кол-во АКТИВНЫХ обращений";
+    public static final String CLOSED_CMD = "Кол-во ЗАКРЫТЫХ обращений";
+    public static final String TODAY_CMD = "Обращений за сегодня";
+    public static final String VACATION_CMD = "Отпуска";
+    public static final String INCATIVITY_CMD = "Простои";
+    public static final String LIDER_CMD = "Лидер за прошлый месяц";
 
     //Типы обращений
     static final String ISSUE_NAME = "Обращений : ";
@@ -64,6 +88,7 @@ public class Consts
 
     public static final String VACATION_CURRENT_YEAR = "project = SUPP_2_VACATION_DEIS AND resolutiondate <=endOfYear()  AND resolutiondate >=startOfYear() AND assignee =";
     public static final String INACTIVITY_CURRENT_YEAR = "project = SUPP_2_INACTIVITY_DEIS AND resolutiondate <=endOfMonth()  AND resolutiondate >=startOfMonth() AND assignee =";
+    public static final String BR = "</br>";
 
     private Consts()
     {

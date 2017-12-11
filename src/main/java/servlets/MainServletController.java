@@ -11,22 +11,15 @@ import java.io.IOException;
 /**
  * @author Andrey Smirnov
  */
-@WebServlet("/other")
-public class OtherServlet extends HttpServlet
+@WebServlet("/monitor")
+public class MainServletController extends HttpServlet
 {
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        super.doPost(request, response);
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setContentType("text/html");
-        AllServletActions.fillPageWithData("other", request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/other.jsp");
+        AllServletActions.fillPageWithData("main", request);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }
 }

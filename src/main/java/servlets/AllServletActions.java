@@ -16,7 +16,6 @@ public class AllServletActions
 
     public static void fillPageWithData(String whoCallMe, HttpServletRequest request)
     {
-        JiraApiUtils.jiraConnect();
         if ( "main".equals(whoCallMe) )
         {
             //Открытых\Закрытых обращений за сегодня
