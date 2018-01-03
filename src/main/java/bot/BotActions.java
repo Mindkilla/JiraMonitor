@@ -1,5 +1,6 @@
 package bot;
 
+import org.telegram.telegrambots.api.objects.User;
 import utils.Consts;
 import utils.JiraApiUtils;
 import org.apache.log4j.Logger;
@@ -53,17 +54,16 @@ public class BotActions
             default:
                 if ( Consts.Users.contains(message.getText().toLowerCase()) )
                 {
-                    String userName = message.getText().toLowerCase();
-                    Integer userId = message.getFrom().getId();
-                    String fromFile = readFromFile(userId);
-                    if ( fromFile == null )
+                    User user = message.getFrom();
+                    String login = message.getText().toLowerCase();
+                    if ( !isRegisteredUser(login, user.getId()) )
                     {
-                        writeToFile(userName, userId);
+                        registerUser(login, user.getId());
                         return answer(message, Consts.REG_OK_MSG);
                     }
                     else
                     {
-                        return answer(message, "Здравствуйте, " + message.getFrom().getFirstName() + "! Вы уже зарегистрированы");
+                        return answer(message, "Здравствуйте, " + user.getFirstName() + "! Вы уже зарегистрированы");
                     }
                 }
                 return answer(message, Consts.UNKNOWN_MSG);
@@ -134,10 +134,10 @@ public class BotActions
     //Доступ
     private static Boolean isAccessibleToUser(Integer id)
     {
-        return readFromFile(id) != null;
+        return isRegisteredUser(id) != null;
     }
 
-    private static void writeToFile(String userName, Integer userId)
+    private static void registerUser(String userName, Integer userId)
     {
         File dir = new File(System.getenv("CATALINA_HOME"), "conf");
         dir.mkdirs();
@@ -160,10 +160,16 @@ public class BotActions
         }
     }
 
-    private static String readFromFile(Integer userid)
+    private static Boolean isRegisteredUser(String userName, Integer userid)
+    {
+        String current = isRegisteredUser(userid);
+        return current.equals(userName);
+    }
+
+    private static String isRegisteredUser(Integer userid)
     {
         Properties usersProp = new Properties();
-        String current = null;
+        String current = "";
         try
         {
             FileInputStream inputStream = new FileInputStream(System.getenv("CATALINA_HOME") + "/" + "conf" + "/" + "bot_users.properties");
@@ -177,6 +183,7 @@ public class BotActions
         }
         return current;
     }
+
     private BotActions()
     {
     }
