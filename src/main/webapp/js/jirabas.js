@@ -4,43 +4,42 @@
 var monitor = angular.module('monitor', []);
 var other = angular.module('other', []);
 var issueCurrMonth;
+var loadingError = "Ошибка загрузки. Перезагрузите страницу!";
 monitor.controller('curClosed', function ($scope, $http, $sce) {
     $http.get("/monitor/currentClosed")
         .then(function (result) {
-            console.log(result);
+            //console.log(result);
             $scope.currentClosed = $sce.trustAsHtml(result.data);
         }, function (error) {
-            console.error(error);
+            $scope.currentClosed = loadingError;
+            //console.error(error);
         });
 });
 
 monitor.controller('monthLider', function ($scope, $http) {
     $http.get("/monitor/monthLider")
         .then(function (result) {
-            console.log(result);
             $scope.monthLider = result.data;
         }, function (error) {
-            console.error(error);
+            $scope.monthLider = loadingError;
         });
 });
 
 monitor.controller('todayIssues', function ($scope, $http, $sce) {
     $http.get("/monitor/todayIssues")
         .then(function (result) {
-            console.log(result);
             $scope.todayIssues = $sce.trustAsHtml(result.data);
         }, function (error) {
-            console.error(error);
+            $scope.todayIssues = loadingError;
         });
 });
 
 monitor.controller('currentActive', function ($scope, $http, $sce) {
     $http.get("/monitor/currentActive")
         .then(function (result) {
-            console.log(result);
             $scope.currentActive = $sce.trustAsHtml(result.data);
         }, function (error) {
-            console.error(error);
+            $scope.currentActive = loadingError;
         });
 });
 
@@ -51,11 +50,10 @@ monitor.controller('issueCurrMonth', function ($scope, $http, $sce) {
     else {
         $http.get("/monitor/issueCurrMonth")
             .then(function (result) {
-                console.log(result);
                 issueCurrMonth= result.data;
                 $scope.issueCurrMonth = $sce.trustAsHtml(result.data);
             }, function (error) {
-                console.error(error);
+                $scope.issueCurrMonth = loadingError;
             });
     }
 });
@@ -63,20 +61,18 @@ monitor.controller('issueCurrMonth', function ($scope, $http, $sce) {
 monitor.controller('issueOpenedNow', function ($scope, $http, $sce) {
     $http.get("/monitor/issueOpenedNow")
         .then(function (result) {
-            console.log(result);
             $scope.issueOpenedNow = $sce.trustAsHtml(result.data);
         }, function (error) {
-            console.error(error);
+            $scope.issueOpenedNow = loadingError;
         });
 });
 
 monitor.controller('issueClosedMonth', function ($scope, $http, $sce) {
     $http.get("/monitor/issueClosedMonth")
         .then(function (result) {
-            console.log(result);
             $scope.issueClosedMonth = $sce.trustAsHtml(result.data);
         }, function (error) {
-            console.error(error);
+            $scope.issueClosedMonth = loadingError;
         });
 });
 
@@ -84,19 +80,17 @@ monitor.controller('issueClosedMonth', function ($scope, $http, $sce) {
 other.controller('vacation-controller', function ($scope, $http, $sce) {
     $http.get("/other/vacation")
         .then(function (result) {
-            console.log(result);
             $scope.vacation = $sce.trustAsHtml(result.data);
         }, function (error) {
-            console.error(error);
+            $scope.vacation = loadingError;
         });
 });
 
 other.controller('inactivity-controller', function ($scope, $http, $sce) {
     $http.get("/other/inactivity")
         .then(function (result) {
-            console.log(result);
             $scope.inactivity = $sce.trustAsHtml(result.data);
         }, function (error) {
-            console.error(error);
+            $scope.inactivity = loadingError;
         });
 });
