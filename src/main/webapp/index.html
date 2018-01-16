@@ -1,6 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<html>
+<!DOCTYPE html>
+<html ng-app="monitor">
 <head>
     <meta charset="utf-8">
     <title>JIRA Монитор</title>
@@ -29,7 +28,8 @@
     <script type="text/javascript" src="plugins/charts-flot/excanvas.min.js"></script>
     <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="/js/jirabas.js"></script>
 </head>
 
 <body class="infobar-offcanvas">
@@ -44,7 +44,7 @@
 <div class="container-fluid">
 
 
-    <div data-widget-group="group1">
+    <div data-widget-group="group1" >
 
         <div class="row">
             <div class="col-md-3">
@@ -53,8 +53,8 @@
                         <div class="title">Открытых\Закрытых обращений <b>за сегодня</b></div>
 
                     </div>
-                    <div class="tile-body">
-                        <div class="content">${todayIssues}</div>
+                    <div class="tile-body" ng-controller="todayIssues">
+                        <div class="content" ng-bind-html="todayIssues"></div>
                     </div>
                     <div class="tile-footer">
 
@@ -67,9 +67,8 @@
                     <div class="tile-heading">
                         <div class="title">Кол-во <b>АКТИВНЫХ обращений</b> на данный момент</div>
                     </div>
-                    <div class="tile-body">
-                        <div class="content">
-                            ${currentActive}
+                    <div class="tile-body" ng-controller="currentActive">
+                        <div class="content" ng-bind-html="currentActive">
                         </div>
                     </div>
                     <div class="tile-footer">
@@ -87,9 +86,8 @@
                         <div class="title">Кол-во <b>ЗАКРЫТЫХ обращений</b> за текущий месяц</div>
 
                     </div>
-                    <div class="tile-body">
-						<span class="content">
-						${currentClosed}</span>
+                    <div class="tile-body" ng-controller="curClosed">
+						<span class="content" ng-bind-html="currentClosed"></span>
                     </div>
                     <div class="tile-footer text-center">
                         <span class="info-text text-right" style="color: #f04743"></span>
@@ -101,13 +99,13 @@
 
 
             <div class="col-md-3">
-                <div class="amazo-tile tile-white">
+                <div class="amazo-tile tile-white" ng-controller="monthLider">
                     <div class="tile-heading">
                         <span class="title">Лидер по кол-ву решенных заявок за ПРОШЛЫЙ месяц</span>
-                        <span class="secondary">${month}</span>
+                        <span class="secondary">{{monthLider.month}}</span>
                     </div>
                     <div class="tile-body">
-                        <span class="content">${max}</span>
+                        <span class="content">{{monthLider.max}}</span>
                     </div>
                     <div class="tile-footer">
                         <span class="info-text text-right" style="color: #94c355"></span>
@@ -121,12 +119,12 @@
 
         <div class="col-md-3">
             <div class="amazo-tile tile-info" href="#">
-                <div class="tile-heading">
+                <div class="tile-heading" ng-controller="issueCurrMonth">
                     <div class="title">Кол-во <b>ЗАКРЫТЫХ обращений</b> за тек.месяц</div>
-                    <span class="secondary">${issueCurmonth}</span>
+                    <span class="secondary" ng-bind-html="issueCurrMonth"></span>
                 </div>
-                <div class="tile-body">
-                    <div class="content">${issueClosedMonth}</div>
+                <div class="tile-body" ng-controller="issueClosedMonth">
+                    <div class="content" ng-bind-html="issueClosedMonth"></div>
                 </div>
                 <div class="tile-footer">
                     <span class="info-text text-right"></span>
@@ -138,12 +136,12 @@
         </div>
         <div class="col-md-3">
             <div class="amazo-tile tile-info" href="#">
-                <div class="tile-heading">
+                <div class="tile-heading" ng-controller="issueCurrMonth">
                     <div class="title">Кол-во <b>ОТКРЫТЫХ обращений</b> по категориям</div>
-                    <span class="secondary">${issueCurmonth}</span>
+                    <span class="secondary" ng-bind-html="issueCurrMonth"></span>
                 </div>
-                <div class="tile-body">
-                    <div class="content">${issueOpenedNow}</div>
+                <div class="tile-body" ng-controller="issueOpenedNow">
+                    <div class="content" ng-bind-html="issueOpenedNow"></div>
                 </div>
                 <div class="tile-footer">
                     <span class="info-text text-right"></span>
@@ -169,6 +167,7 @@
         <script type="text/javascript" src="plugins/charts-chartistjs/chartist.min.js"></script>               	<!-- Chartist -->
         <script type="text/javascript" src="plugins/charts-chartistjs/chartist-plugin-tooltip.js"></script>    	<!-- Chartist -->
         <script type="text/javascript" src="js/demo-index.js"></script> 										<!-- Initialize scripts for this page-->
+
 
         <!-- End loading page level scripts-->
 </body>

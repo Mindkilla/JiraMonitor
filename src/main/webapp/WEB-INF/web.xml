@@ -6,24 +6,81 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          metadata-complete="true">
-    <display-name>Archetype Created Web Application</display-name>
-    <servlet>
-        <servlet-name>MainServlet</servlet-name>
-        <servlet-class>servlets.MainServletController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MainServlet</servlet-name>
-        <url-pattern>/monitor</url-pattern>
-    </servlet-mapping>
+    <display-name>Jira Monitor Servlets</display-name>
 
     <servlet>
-        <servlet-name>OtherServlet</servlet-name>
-        <servlet-class>servlets.OtherServletController</servlet-class>
+        <servlet-name>TodayIssuesServlet</servlet-name>
+        <servlet-class>servlets.TodayIssuesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>OtherServlet</servlet-name>
-        <url-pattern>/other</url-pattern>
+        <servlet-name>TodayIssuesServlet</servlet-name>
+        <url-pattern>/monitor/todayIssues</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CurrentActiveServlet</servlet-name>
+        <servlet-class>servlets.CurrentActiveServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CurrentActiveServlet</servlet-name>
+        <url-pattern>/monitor/currentActive</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CurrentClosedServlet</servlet-name>
+        <servlet-class>servlets.CurrentClosedServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CurrentClosedServlet</servlet-name>
+        <url-pattern>/monitor/currentClosed</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MonthLiderServlet</servlet-name>
+        <servlet-class>servlets.MonthLiderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MonthLiderServlet</servlet-name>
+        <url-pattern>/monitor/monthLider</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>IssueCurrMonthServlet</servlet-name>
+        <servlet-class>servlets.IssueCurrMonthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IssueCurrMonthServlet</servlet-name>
+        <url-pattern>/monitor/issueCurrMonth</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>IssueClosedCurrMonthServlet</servlet-name>
+        <servlet-class>servlets.IssueClosedCurrMonthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IssueClosedCurrMonthServlet</servlet-name>
+        <url-pattern>/monitor/issueClosedMonth</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>IssueOpenedCurrMonthServlet</servlet-name>
+        <servlet-class>servlets.IssueOpenedCurrMonthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IssueOpenedCurrMonthServlet</servlet-name>
+        <url-pattern>/monitor/issueOpenedNow</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>VacationServlet</servlet-name>
+        <servlet-class>servlets.VacationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VacationServlet</servlet-name>
+        <url-pattern>/other/vacation</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>InactivityServlet</servlet-name>
+        <servlet-class>servlets.InactivityServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InactivityServlet</servlet-name>
+        <url-pattern>/other/inactivity</url-pattern>
+    </servlet-mapping>
+
 
     <listener>
         <listener-class>servlets.ServletListener</listener-class>

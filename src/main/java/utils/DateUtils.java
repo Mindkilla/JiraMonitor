@@ -1,15 +1,17 @@
 package utils;
 
+import jersey.repackaged.com.google.common.collect.ImmutableList;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
-import java.util.Locale;
+import java.util.List;
 
 /**
  * @author Andrey Smirnov
  */
 public class DateUtils
 {
+    private static final List<String> MONTH_RU = ImmutableList.of("январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь");
     private DateUtils()
     {
     }
@@ -27,7 +29,7 @@ public class DateUtils
     public static String getMonthName()
     {
         LocalDate aDate = new LocalDate(getYear(), getPrevMonth(), 1);
-        return aDate.monthOfYear().getAsText(Locale.getDefault());
+        return MONTH_RU.get(Integer.parseInt(aDate.monthOfYear().getAsString()) - 1);
     }
 
     private static int getYear()

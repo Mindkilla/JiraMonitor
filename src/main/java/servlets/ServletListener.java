@@ -6,7 +6,6 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.generics.BotSession;
-import utils.JiraApiUtils;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -24,7 +23,6 @@ public class ServletListener implements ServletContextListener
     {
 
         LOGGER.info("Context initialized, let`s do some magic!");
-        JiraApiUtils.jiraConnect();
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         try

@@ -1,6 +1,7 @@
 package servlets;
 
-import javax.servlet.RequestDispatcher;
+import utils.JiraApiUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +11,18 @@ import java.io.IOException;
 
 /**
  * @author Andrey Smirnov
+ * @date 15.01.2018
+ * Кол-во ЗАКРЫТЫХ обращений за текущий месяц для каждого
  */
-@WebServlet("/other")
-public class OtherServletController extends HttpServlet
+@WebServlet("/monitor/currentClosed")
+public class CurrentClosedServlet extends HttpServlet
 {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
-        AllServletActions.fillPageWithData("other", request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/other.jsp");
-        dispatcher.forward(request, response);
+        request.setAttribute("currentClosed", JiraApiUtils.getCurrentClosed());
+        response.getWriter().print(request.getAttribute("currentClosed").toString());
     }
 }

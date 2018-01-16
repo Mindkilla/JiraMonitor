@@ -1,6 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<html>
+<!DOCTYPE html>
+<html ng-app="other">
 <head>
     <meta charset="utf-8">
     <title>JIRA Монитор</title>
@@ -29,7 +28,8 @@
     <script type="text/javascript" src="plugins/charts-flot/excanvas.min.js"></script>
     <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="/js/jirabas.js"></script>
 </head>
 
 <body class="infobar-offcanvas">
@@ -53,8 +53,8 @@
                         <div class="title">Использовано отпуска <b>за год, дней</b></div>
 
                     </div>
-                    <div class="tile-body">
-                        <div class="content">${vacation}</div>
+                    <div class="tile-body" ng-controller="vacation-controller">
+                        <div class="content" ng-bind-html="vacation"></div>
                     </div>
                     <div class="tile-footer">
 
@@ -62,16 +62,14 @@
                     </div>
                 </div>
             </div>
-			<div class="col-md-3">
+            <div class="col-md-3">
                 <div class="amazo-tile tile-success">
                     <div class="tile-heading">
                         <div class="title">Простои <b>за месяц, часов</b></div>
 
                     </div>
-                    <div class="tile-body">
-                        <div class="content">
-                            ${inactivity}
-                        </div>
+                    <div class="tile-body" ng-controller="inactivity-controller">
+                        <div class="content" ng-bind-html="inactivity"></div>
                     </div>
                     <div class="tile-footer">
 
@@ -79,26 +77,26 @@
                     </div>
                 </div>
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 
-        <!-- Load site level scripts -->
-        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script> 							<!-- Load jQuery -->
-        <script type="text/javascript" src="js/jqueryui-1.9.2.min.js"></script> 							<!-- Load jQueryUI -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script> 								<!-- Load Bootstrap -->
-        <script type="text/javascript" src="plugins/sparklines/jquery.sparklines.min.js"></script>  		<!-- Sparkline -->
-        <script type="text/javascript" src="js/enquire.min.js"></script> 									<!-- Enquire for Responsiveness -->
-        <!-- End loading site level scripts -->
+<!-- Load site level scripts -->
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script> 							<!-- Load jQuery -->
+<script type="text/javascript" src="js/jqueryui-1.9.2.min.js"></script> 							<!-- Load jQueryUI -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script> 								<!-- Load Bootstrap -->
+<script type="text/javascript" src="plugins/sparklines/jquery.sparklines.min.js"></script>  		<!-- Sparkline -->
+<script type="text/javascript" src="js/enquire.min.js"></script> 									<!-- Enquire for Responsiveness -->
+<!-- End loading site level scripts -->
 
-        <!-- Load page level scripts-->
+<!-- Load page level scripts-->
 
-        <script type="text/javascript" src="plugins/wijets/wijets.js"></script>     								<!-- Wijet -->
-        <script type="text/javascript" src="plugins/charts-chartistjs/chartist.min.js"></script>               	<!-- Chartist -->
-        <script type="text/javascript" src="plugins/charts-chartistjs/chartist-plugin-tooltip.js"></script>    	<!-- Chartist -->
-        <script type="text/javascript" src="js/demo-index.js"></script> 										<!-- Initialize scripts for this page-->
+<script type="text/javascript" src="plugins/wijets/wijets.js"></script>     								<!-- Wijet -->
+<script type="text/javascript" src="plugins/charts-chartistjs/chartist.min.js"></script>               	<!-- Chartist -->
+<script type="text/javascript" src="plugins/charts-chartistjs/chartist-plugin-tooltip.js"></script>    	<!-- Chartist -->
+<script type="text/javascript" src="js/demo-index.js"></script> 										<!-- Initialize scripts for this page-->
 
-        <!-- End loading page level scripts-->
+<!-- End loading page level scripts-->
 </body>
 </html>

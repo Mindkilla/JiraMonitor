@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Andrey Smirnov
  */
+@Deprecated
 public class AllServletActions
 {
     private AllServletActions()
     {
     }
 
+    @Deprecated
     public static void fillPageWithData(String whoCallMe, HttpServletRequest request)
     {
         if ( "main".equals(whoCallMe) )

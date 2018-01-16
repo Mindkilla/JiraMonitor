@@ -21,7 +21,6 @@ public class JiraApiUtils
     {
     }
 
-    private static JiraClient connect;
 
     //ОТКРЫТЫХ\ЗАКРЫТЫХ ОБРАЩЕНИЙ ЗА СЕГОДНЯ
     public static String todayIssues(){
@@ -107,10 +106,10 @@ public class JiraApiUtils
     }
 
     //Connect to jira rest api
-    public static void jiraConnect()
+    private static JiraClient jiraConnect()
     {
         BasicCredentials creds = new BasicCredentials(Consts.JIRA_USER, Consts.JIRA_PASS);
-        connect =  new JiraClient(Consts.JIRA_URL, creds);
+        return new JiraClient(Consts.JIRA_URL, creds);
     }
 
     private static String issueCount(Map<String, String> userJql)
@@ -126,7 +125,7 @@ public class JiraApiUtils
         {
             try
             {
-                Issue.SearchResult result = connect.searchIssues(entry.getValue(), "project");
+                Issue.SearchResult result = jiraConnect().searchIssues(entry.getValue(), "project");
                 total.append(entry.getKey());
                 total.append(" : ");
                 total.append(result.total);
@@ -151,7 +150,7 @@ public class JiraApiUtils
         {
             try
             {
-                Issue.SearchResult result = connect.searchIssues(entry.getValue(), "project");
+                Issue.SearchResult result = jiraConnect().searchIssues(entry.getValue(), "project");
                 total.put(entry.getKey(), result.total);
             }
             catch ( JiraException ex )
@@ -171,7 +170,7 @@ public class JiraApiUtils
         int time = 0;
         try
         {
-            Issue.SearchResult result = connect.searchIssues(jql);
+            Issue.SearchResult result = jiraConnect().searchIssues(jql);
             if ( result.issues.isEmpty() )
             {
                 time = 0;
@@ -200,7 +199,7 @@ public class JiraApiUtils
             int timeInSec = 0;
             try
             {
-                Issue.SearchResult result = connect.searchIssues(entry.getValue());
+                Issue.SearchResult result = jiraConnect().searchIssues(entry.getValue());
                 if ( result.issues.isEmpty() )
                 {
                     time.append(entry.getKey());
