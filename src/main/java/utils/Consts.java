@@ -1,9 +1,6 @@
 package utils;
 
 import bot.Emoji;
-import jersey.repackaged.com.google.common.collect.ImmutableList;
-
-import java.util.List;
 
 /**
  * @author Andrey Smirnov
@@ -26,7 +23,6 @@ public class Consts
     public static final String ESIES = " EsiES ";
     public static final String KUAAE = " KuaAE ";
     public static final String ZHEEV = " ZheEV ";
-    public static final List<String> Users = ImmutableList.of("levas", "smiana", "esies", "kuaae", "zheev");
 
     public static final String NAME_ALEX = "Саня";
     public static final String NAME_ANDREY = "Андрей";
@@ -36,11 +32,13 @@ public class Consts
 
     //Bot messages
     public static final String START_MSG = "Этот бот предназначен для сервиса Jira Монитор [bss.kz]" + "\r\n"
-            + "Чтобы получить доступ к возможностям бота отправьте свой логин от учетной записи!";
+            + "Чтобы получить доступ к возможностям бота отправьте /reg <логин от учетной записи>!";
     public static final String REG_OK_MSG = "Успешно! Теперь Вам доступны все возможности бота JiraMonitor Bot!";
+    public static final String REG_CODE_MSG = "Код подтверждения был отправлен Вам на почту! Отправьте его используя команду /code <код " +
+            "подтверждения>";
     public static final String UNKNOWN_MSG = "Что вы от меня хотите" + Emoji.DISAPPOINTED_BUT_RELIEVED_FACE;
     public static final String ERROR_MSG = "У Вас нет доступа к данному функционалу!" +
-            "Чтобы получить доступ к возможностям бота отправьте свой логин от учетной записи!";
+            " Чтобы получить доступ к возможностям бота отправьте /reg <логин от учетной записи>!";
 
     //Bot Commands
     public static final String ACTIVE_CMD = "Кол-во АКТИВНЫХ обращений";

@@ -1,34 +1,25 @@
 package bot;
 
-import org.telegram.telegrambots.api.objects.User;
-import utils.Consts;
-import utils.JiraApiUtils;
-import org.apache.log4j.Logger;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Message;
+import org.telegram.telegrambots.api.objects.User;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
+import registration.RegistrationUtils;
+import utils.Consts;
+import utils.JiraApiUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * @author Andrey Smirnov
  */
-public class BotActions
-{
-    private static final Logger LOGGER = Logger.getLogger(BotActions.class);
+public class BotActions {
 
-    public static SendMessage doSomeAction(Message message)
-    {
+    public static SendMessage doSomeAction(Message message) {
         String messageText = message.getText();
-        switch (messageText)
-        {
+        switch (messageText) {
             case "/start":
                 return startAnswer(message, Consts.START_MSG);
             case "/help":
@@ -52,54 +43,51 @@ public class BotActions
             case Consts.LIDER_CMD:
                 return createAnswer(message, JiraApiUtils.getLider() + " " + Emoji.SMILING_FACE_WITH_OPEN_MOUTH);
             default:
-                if ( Consts.Users.contains(message.getText().toLowerCase()) )
-                {
-                    User user = message.getFrom();
-                    String login = message.getText().toLowerCase();
-                    if ( !isRegisteredUser(login, user.getId()) )
-                    {
-                        registerUser(login, user.getId());
-                        return answer(message, Consts.REG_OK_MSG);
-                    }
-                    else
-                    {
+                User user = message.getFrom();
+                if ((message.getText().toLowerCase().contains("/reg "))) {
+                    String login = message.getText().toLowerCase().split("\\/reg ")[1];
+                    if (!RegistrationUtils.isRegisteredUser(login, user.getId())) {
+                        if (RegistrationUtils.sendRegCode(login, user.getId()))
+                            return answer(message, Consts.REG_CODE_MSG);
+                    } else {
                         return answer(message, "Здравствуйте, " + user.getFirstName() + "! Вы уже зарегистрированы");
+                    }
+                }
+                if ((message.getText().toLowerCase().contains("/code "))) {
+                    String code = message.getText().toLowerCase().split("\\/code ")[1];
+                    if (RegistrationUtils.checkRegCode(code, user.getId()))
+                        return answer(message, Consts.REG_OK_MSG);
+                    else {
+                        return answer(message, "Что-то пошло не так! Возможно введены не верные данные!");
                     }
                 }
                 return answer(message, Consts.UNKNOWN_MSG);
         }
     }
 
-    private static SendMessage createAnswer(Message message, String answerMsg)
-    {
-        if ( isAccessibleToUser(message.getFrom().getId()) )
-        {
+    private static SendMessage createAnswer(Message message, String answerMsg) {
+        if (isAccessibleToUser(message.getFrom().getId())) {
             return answer(message, answerMsg);
-        }
-        else
-        {
+        } else {
             return errorAnswer(message);
         }
     }
 
-    private static SendMessage startAnswer(Message message, String text)
-    {
+    private static SendMessage startAnswer(Message message, String text) {
         SendMessage sMessage = new SendMessage();
         sMessage.setChatId(message.getChatId());
         sMessage.setText(text);
         return sMessage;
     }
 
-    private static SendMessage errorAnswer(Message message)
-    {
+    private static SendMessage errorAnswer(Message message) {
         SendMessage sMessage = new SendMessage();
         sMessage.setChatId(message.getChatId());
         sMessage.setText(Consts.ERROR_MSG);
         return sMessage;
     }
 
-    private static SendMessage answer(Message message, String text)
-    {
+    private static SendMessage answer(Message message, String text) {
         SendMessage sMessage = new SendMessage();
         sMessage.setChatId(message.getChatId());
         sMessage.setReplyMarkup(getKeyboard());
@@ -107,8 +95,7 @@ public class BotActions
         return sMessage;
     }
 
-    private static ReplyKeyboardMarkup getKeyboard()
-    {
+    private static ReplyKeyboardMarkup getKeyboard() {
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         replyKeyboardMarkup.setSelective(true);
         replyKeyboardMarkup.setResizeKeyboard(true);
@@ -132,59 +119,10 @@ public class BotActions
     }
 
     //Доступ
-    private static Boolean isAccessibleToUser(Integer id)
-    {
-        return isRegisteredUser(id) != null;
+    private static Boolean isAccessibleToUser(Integer id) {
+        return RegistrationUtils.isRegisteredUser(id) != null;
     }
 
-    private static void registerUser(String userName, Integer userId)
-    {
-        File dir = new File(System.getenv("CATALINA_HOME"), "conf");
-        dir.mkdirs();
-        File propertyFile = new File(dir, "bot_users.properties");
-        try
-        {
-            if ( !propertyFile.exists() )
-            {
-                propertyFile.createNewFile();
-            }
-            try (FileWriter out = new FileWriter(propertyFile.getAbsoluteFile(), true))
-            {
-                //Записываем текст в файл
-                out.write(userId + "=" + userName + "\r\n");
-            }
-        }
-        catch ( IOException e )
-        {
-            LOGGER.error(e);
-        }
-    }
-
-    private static Boolean isRegisteredUser(String userName, Integer userid)
-    {
-        String current = isRegisteredUser(userid);
-        return current.equals(userName);
-    }
-
-    private static String isRegisteredUser(Integer userid)
-    {
-        Properties usersProp = new Properties();
-        String current = "";
-        try
-        {
-            FileInputStream inputStream = new FileInputStream(System.getenv("CATALINA_HOME") + "/" + "conf" + "/" + "bot_users.properties");
-            usersProp.load(inputStream);
-            current = usersProp.getProperty(userid.toString());
-            inputStream.close();
-        }
-        catch ( IOException e )
-        {
-            LOGGER.error(e);
-        }
-        return current;
-    }
-
-    private BotActions()
-    {
+    private BotActions() {
     }
 }
