@@ -15,11 +15,9 @@ import java.io.IOException;
  * Простои
  */
 @WebServlet("/other/inactivity")
-public class InactivityServlet extends HttpServlet
-{
+public class InactivityServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         request.setAttribute("inactivity", JiraApiUtils.getInactivity());

@@ -15,11 +15,9 @@ import java.io.IOException;
  * Отпуска
  */
 @WebServlet("/other/vacation")
-public class VacationServlet extends HttpServlet
-{
+public class VacationServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         request.setAttribute("vacation", JiraApiUtils.getVacation());

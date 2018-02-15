@@ -15,11 +15,9 @@ import java.io.IOException;
  * Кол-во ЗАКРЫТЫХ обращений за текущий месяц для каждого
  */
 @WebServlet("/monitor/currentClosed")
-public class CurrentClosedServlet extends HttpServlet
-{
+public class CurrentClosedServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         request.setAttribute("currentClosed", JiraApiUtils.getCurrentClosed());

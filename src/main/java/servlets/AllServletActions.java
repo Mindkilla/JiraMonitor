@@ -9,17 +9,11 @@ import javax.servlet.http.HttpServletRequest;
  * @author Andrey Smirnov
  */
 @Deprecated
-public class AllServletActions
-{
-    private AllServletActions()
-    {
-    }
+public class AllServletActions {
 
     @Deprecated
-    public static void fillPageWithData(String whoCallMe, HttpServletRequest request)
-    {
-        if ( "main".equals(whoCallMe) )
-        {
+    public static void fillPageWithData(String whoCallMe, HttpServletRequest request) {
+        if ("main".equals(whoCallMe)) {
             //Открытых\Закрытых обращений за сегодня
             request.setAttribute("todayIssues", JiraApiUtils.todayIssues());
             //Кол-во АКТИВНЫХ обращений на данный момент для каждого
@@ -35,9 +29,7 @@ public class AllServletActions
             request.setAttribute("issueClosedMonth", JiraApiUtils.getIssueClosedCurrMonth());
             //Кол-во ОТКРЫТЫХ дефектов, консультаций
             request.setAttribute("issueOpenedNow", JiraApiUtils.getIssueOpenedCurrMonth());
-        }
-        else
-        {
+        } else {
             //Отпуска
             request.setAttribute("vacation", JiraApiUtils.getVacation());
             //Простои
@@ -45,4 +37,6 @@ public class AllServletActions
         }
     }
 
+    private AllServletActions() {
+    }
 }

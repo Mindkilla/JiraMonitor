@@ -26,7 +26,7 @@ public class RegistrationUtils {
     public static boolean sendRegCode(String login, Integer id) {
         String email = null;
         try {
-            email = LdapSearch.getNameAndMail(login);
+            email = LdapSearch.getMailFromAD(login);
         } catch (NamingException e) {
             LOGGER.error(e.getMessage());
             return false;

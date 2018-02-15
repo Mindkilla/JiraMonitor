@@ -15,11 +15,9 @@ import java.io.IOException;
  * Открытых\Закрытых обращений за сегодня
  */
 @WebServlet("/monitor/todayIssues")
-public class TodayIssuesServlet extends HttpServlet
-{
+public class TodayIssuesServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         request.setAttribute("todayIssues", JiraApiUtils.todayIssues());

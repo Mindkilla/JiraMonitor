@@ -15,11 +15,9 @@ import java.io.IOException;
  * Кол-во ОТКРЫТЫХ дефектов, консультаций
  */
 @WebServlet("/monitor/issueOpenedNow")
-public class IssueOpenedCurrMonthServlet extends HttpServlet
-{
+public class IssueOpenedCurrMonthServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         request.setAttribute("issueOpenedNow", JiraApiUtils.getIssueOpenedCurrMonth());

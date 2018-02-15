@@ -15,11 +15,9 @@ import java.io.IOException;
  * ЗАКРЫТЫЕ Дефекты консультации пожелания
  */
 @WebServlet("/monitor/issueClosedMonth")
-public class IssueClosedCurrMonthServlet extends HttpServlet
-{
+public class IssueClosedCurrMonthServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         request.setAttribute("issueClosedMonth", JiraApiUtils.getIssueClosedCurrMonth());

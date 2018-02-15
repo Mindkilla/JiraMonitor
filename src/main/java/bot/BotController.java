@@ -11,40 +11,28 @@ import utils.Consts;
 /**
  * @author Andrey Smirnov
  */
-public class BotController extends TelegramLongPollingBot
-{
+public class BotController extends TelegramLongPollingBot {
     private static final Logger LOGGER = Logger.getLogger(BotController.class);
 
-    public void onUpdateReceived(Update update)
-    {
+    public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
-        if ( message != null && message.hasText() )
-        {
+        if (message != null && message.hasText()) {
             SendMessage answer = BotActions.doSomeAction(message);
-            if ( answer != null )
-            {
-                try
-                {
+            if (answer != null) {
+                try {
                     sendMessage(answer);
-                }
-                catch ( TelegramApiException e )
-                {
+                } catch (TelegramApiException e) {
                     LOGGER.error(e.getMessage());
                 }
             }
         }
     }
 
-    public String getBotUsername()
-    {
+    public String getBotUsername() {
         return Consts.BOT_USERNAME;
     }
 
-    public String getBotToken()
-    {
+    public String getBotToken() {
         return Consts.BOT_TOKEN;
     }
 }
-
-
-

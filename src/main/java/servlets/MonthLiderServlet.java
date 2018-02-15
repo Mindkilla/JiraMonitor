@@ -17,11 +17,9 @@ import java.io.IOException;
  * Лидер по кол-ву решенных обращений за прошлый месяц
  */
 @WebServlet("/monitor/monthLider")
-public class MonthLiderServlet extends HttpServlet
-{
+public class MonthLiderServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONObject jsonObject = new JSONObject();
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");

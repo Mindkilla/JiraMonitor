@@ -15,11 +15,9 @@ import java.io.IOException;
  * Кол-во АКТИВНЫХ обращений на данный момент для каждого
  */
 @WebServlet("/monitor/currentActive")
-public class CurrentActiveServlet extends HttpServlet
-{
+public class CurrentActiveServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         request.setAttribute("currentActive", JiraApiUtils.getCurrentActive());

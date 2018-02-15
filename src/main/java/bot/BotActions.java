@@ -15,9 +15,9 @@ import java.util.List;
 /**
  * @author Andrey Smirnov
  */
-public class BotActions {
+class BotActions {
 
-    public static SendMessage doSomeAction(Message message) {
+    static SendMessage doSomeAction(Message message) {
         String messageText = message.getText();
         switch (messageText) {
             case "/start":
@@ -43,26 +43,32 @@ public class BotActions {
             case Consts.LIDER_CMD:
                 return createAnswer(message, JiraApiUtils.getLider() + " " + Emoji.SMILING_FACE_WITH_OPEN_MOUTH);
             default:
-                User user = message.getFrom();
-                if ((message.getText().toLowerCase().contains("/reg "))) {
-                    String login = message.getText().toLowerCase().split("\\/reg ")[1];
-                    if (!RegistrationUtils.isRegisteredUser(login, user.getId())) {
-                        if (RegistrationUtils.sendRegCode(login, user.getId()))
-                            return answer(message, Consts.REG_CODE_MSG);
-                    } else {
-                        return answer(message, "Здравствуйте, " + user.getFirstName() + "! Вы уже зарегистрированы");
-                    }
-                }
-                if ((message.getText().toLowerCase().contains("/code "))) {
-                    String code = message.getText().toLowerCase().split("\\/code ")[1];
-                    if (RegistrationUtils.checkRegCode(code, user.getId()))
-                        return answer(message, Consts.REG_OK_MSG);
-                    else {
-                        return answer(message, "Что-то пошло не так! Возможно введены не верные данные!");
-                    }
-                }
-                return answer(message, Consts.UNKNOWN_MSG);
+                return registerOrUnknownMsg(message);
+
         }
+    }
+
+    private static SendMessage registerOrUnknownMsg(Message message) {
+        String messageText = message.getText();
+        User user = message.getFrom();
+        if ((messageText.toLowerCase().contains("/reg "))) {
+            String login = messageText.toLowerCase().split("\\/reg ")[1];
+            if (!RegistrationUtils.isRegisteredUser(login, user.getId())) {
+                if (RegistrationUtils.sendRegCode(login, user.getId()))
+                    return answer(message, Consts.REG_CODE_MSG);
+            } else {
+                return answer(message, "Здравствуйте, " + user.getFirstName() + "! Вы уже зарегистрированы");
+            }
+        }
+        if ((messageText.toLowerCase().contains("/code "))) {
+            String code = messageText.toLowerCase().split("\\/code ")[1];
+            if (RegistrationUtils.checkRegCode(code, user.getId()))
+                return answer(message, Consts.REG_OK_MSG);
+            else {
+                return answer(message, "Что-то пошло не так! Возможно введены не верные данные!");
+            }
+        }
+        return answer(message, Consts.UNKNOWN_MSG);
     }
 
     private static SendMessage createAnswer(Message message, String answerMsg) {

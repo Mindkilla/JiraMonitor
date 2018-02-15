@@ -22,7 +22,7 @@ class LdapSearch {
 
     private static final Logger LOGGER = Logger.getLogger(LdapSearch.class);
 
-    static String getNameAndMail(String login) throws NamingException {
+    static String getMailFromAD(String login) throws NamingException {
         Ini ini = new Ini();
         try {
             ini.load(LdapSearch.class.getResourceAsStream("/config.ini"));
@@ -30,7 +30,8 @@ class LdapSearch {
             LOGGER.error(e.getMessage());
         }
         Profile.Section section = ini.get("ldap");
-        String result = null;
+        String email = null;
+        //InitialDirContext constructor applies only Hashtable :(
         Hashtable<String, String> ldapEnv = new Hashtable<String, String>(11);
         ldapEnv.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         ldapEnv.put(Context.PROVIDER_URL, section.get("providerUrl"));
@@ -53,11 +54,11 @@ class LdapSearch {
         NamingEnumeration<SearchResult> answer = ldapContext.search(searchBase, searchFilter, searchCtls);
         // Loop through the search results
         while (answer.hasMoreElements()) {
-            javax.naming.directory.SearchResult sr = answer.next();
+            SearchResult sr = answer.next();
             Attributes attrs = sr.getAttributes();
-            result = (attrs.get("mail")).toString().split("mail: ")[1];
+            email = attrs.get("mail").toString().split("mail: ")[1];
         }
-        return result;
+        return email;
     }
 
     private LdapSearch() {
